@@ -1,16 +1,19 @@
-import './App.css';
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import Login from "./pages/auth/Login";
+import Wait from "./pages/wait page/Wait";
+import Register from "./pages/auth/Register";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   return (
     <div className="App">
-      <h4>
-        Welcome to 
-        <em> Note Down</em>
-      </h4>
-      <p>
-        Know about author -{" "}
-        <a href="https://adarshsingh.vercel.app" target="_blank" rel="noreferrer">Adarsh Singh</a>
-      </p>
+      <Routes>
+        <Route path="/" element = {<Wait />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
     </div>
   );
 }

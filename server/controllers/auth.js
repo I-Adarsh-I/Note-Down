@@ -108,10 +108,6 @@ passport.deserializeUser(async function (id, done) {
   }else{
     console.log("No user found")
   }
-  //  function (err, user) {
-  //   done(err, user);
-  //   console.log(err);
-  // });
 });
 
 module.exports.googleLogin = passport.authenticate("google", {
@@ -119,7 +115,7 @@ module.exports.googleLogin = passport.authenticate("google", {
 });
 
 (module.exports.googleCallback = passport.authenticate("google", {
-  successRedirect: 'http://localhost:5000/auth/google/callback',
+  successRedirect: 'http://localhost:3000/profile',
   failureRedirect: "/login",
 })),
   (req, res) => {
