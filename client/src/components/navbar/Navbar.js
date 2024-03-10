@@ -7,6 +7,7 @@ import {
   IconButton,
   Collapse,
 } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const NavbarTop = () => {
   const [openNav, setOpenNav] = useState(false);
@@ -26,7 +27,7 @@ const NavbarTop = () => {
         className="p-1 font-normal"
       >
         <a href="#" className="flex items-center">
-          Pages
+          Write
         </a>
       </Typography>
 
@@ -45,7 +46,7 @@ const NavbarTop = () => {
 
   return (
     <div>
-      <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4">
+      <Navbar className="fixed top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography
             as="a"
@@ -59,17 +60,17 @@ const NavbarTop = () => {
             <div className="flex items-center gap-x-1">
               <Button
                 variant="text"
-                size="sm"
+                size="md"
                 className="hidden lg:inline-block"
               >
-                <span>Sign In</span>
+                <Link to={"/login"}>Sign In</Link>
               </Button>
               <Button
                 variant="gradient"
                 size="md"
                 className="hidden lg:inline-block"
               >
-                <span>Register</span>
+                <Link to={"/register"}>Register</Link>
               </Button>
             </div>
             <IconButton
