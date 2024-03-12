@@ -104,7 +104,6 @@ passport.deserializeUser(async function (id, done) {
   const user = await userModel.findById(id)
   if(user){
     done(user)
-    console.log('Printing user')
   }else{
     console.log("No user found")
   }

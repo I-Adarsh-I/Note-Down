@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavbarTop from "../../components/navbar/Navbar";
 import {
   Avatar,
@@ -11,6 +11,14 @@ import {
   styled,
   Grid,
 } from "@mui/material";
+import {
+  Tabs,
+  TabsHeader,
+  TabsBody,
+  Tab,
+  TabPanel,
+} from "@material-tailwind/react";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 const Profile = () => {
   const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -41,12 +49,12 @@ const Profile = () => {
       },
     },
   }));
-
+  
   return (
     <div className="mt-20">
       <NavbarTop />
       <Container>
-        <Box margin={'100px 0 0 0'} sx={{ height: "85vh"}}>
+        <Box margin={"100px 0 0 0"} sx={{ height: "85vh" }}>
           <Grid container>
             <Grid item xs={12} md={7}>
               <div className="flex flex-col text-center items-center gap-1 sm:flex-col sm:items-center sm:text-center md:flex-col md:items-start md:text-start lg:flex-col lg:items-start lg:text-start">
@@ -75,12 +83,16 @@ const Profile = () => {
                   <Typography variant="body1">2 Following</Typography>
                   <Typography variant="body1">2 Followers</Typography>
                 </Stack>
-                <Typography variant="body1" maxWidth={"500px"}>
+                <Typography
+                  variant="body1"
+                  maxWidth={"500px"}
+                  color={"#424242"}
+                >
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                   Praesentium vitae eos in quae magnam quod dignissimos
                   exercitationem corrupti iure totam.
                 </Typography>
-                <Stack direction={"row"} gap={2}>
+                <Stack direction={"row"} gap={2} alignItems={"center"}>
                   <Button
                     variant="contained"
                     size="small"
@@ -97,6 +109,9 @@ const Profile = () => {
                   >
                     Follow
                   </Button>
+                  <button className="mt-2 ms-3 p-2 rounded-full hover:bg-gray-100">
+                    <MoreHorizIcon />
+                  </button>
                 </Stack>
               </div>
             </Grid>
@@ -111,6 +126,8 @@ const Profile = () => {
               </Box>
             </Grid>
           </Grid>
+          
+          
         </Box>
       </Container>
     </div>
