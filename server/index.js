@@ -24,6 +24,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Routes
+app.get("/", (req, res) => {
+  return res.redirect('http://localhost:3000/login');
+});
 app.use(userRouter);
 app.use(blogRoutes);
 app.use(fileRoutes);
@@ -33,7 +36,7 @@ const startServer = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URL);
     console.log("Connected to DB");
-    app.listen(process.env.PORT, () => {
+    app.listen(process.env.PORT || process.env.PORT, () => {
       console.log(`Server has started on PORT - ${process.env.PORT}`);
     });
 
