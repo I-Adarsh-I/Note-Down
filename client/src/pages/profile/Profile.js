@@ -126,8 +126,7 @@ const Profile = () => {
               </Box>
             </Grid>
           </Grid>
-          
-          
+                Card will be here
         </Box>
       </Container>
     </div>
