@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import NavbarTop from "../../components/navbar/Navbar";
 import {
   Avatar,
@@ -11,13 +11,6 @@ import {
   styled,
   Grid,
 } from "@mui/material";
-import {
-  Tabs,
-  TabsHeader,
-  TabsBody,
-  Tab,
-  TabPanel,
-} from "@material-tailwind/react";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 const Profile = () => {
@@ -126,7 +119,6 @@ const Profile = () => {
               </Box>
             </Grid>
           </Grid>
-                Card will be here
         </Box>
       </Container>
     </div>
