@@ -8,6 +8,7 @@ var mongoose = require("mongoose");
 var userRouter = require("./routes/user_routes");
 var blogRoutes = require("./routes/blog_route");
 var fileRoutes = require("./routes/file_route");
+var aiRoutes = require("./routes/genai_route")
 
 app.use(express.json());
 app.use(cors());
@@ -30,6 +31,7 @@ app.get("/", (req, res) => {
 app.use(userRouter);
 app.use(blogRoutes);
 app.use(fileRoutes);
+app.use(aiRoutes);
 
 //Start server
 const startServer = async () => {
