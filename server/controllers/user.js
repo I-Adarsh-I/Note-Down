@@ -20,3 +20,18 @@ module.exports.updateUserInfo = async (req, res) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
+module.exports.getUserInfo = async(req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const userDetails = await userModel.findOne({_id: userId}).select('-password');
+    if(!userDetails){
+      return res.status(404).json({error: 'User does not exist'});
+    }
+    return res.status(200).json({data: userDetails});
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}

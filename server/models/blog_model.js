@@ -26,7 +26,7 @@ const blogSchema = mongoose.Schema({
       type: String,
     },
   ],
-  like: [
+  likes: [
     {
       type: ObjectId,
       ref: "User",
@@ -41,6 +41,10 @@ const blogSchema = mongoose.Schema({
       },
     },
   ],
+  isEdited: {
+    type: Boolean,
+    default: false
+  },
   postedAt: {
     type: Date,
     default: Date.now,
