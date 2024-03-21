@@ -6,7 +6,7 @@ const Wait = () => {
     <div>
     <NavbarTop />
       <div className="h-auto flex align-center flex-col">
-        <h4 className="mt-5">
+        <h4 className="mt-24">
           Welcome to
           <em> Note Down</em>
         </h4>

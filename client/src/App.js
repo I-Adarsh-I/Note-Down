@@ -4,6 +4,7 @@ import Login from "./pages/auth/Login";
 import Wait from "./pages/wait page/Wait";
 import Register from "./pages/auth/Register";
 import Profile from "./pages/profile/Profile";
+import Home from "./pages/home/Home";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </div>
   );
