@@ -5,6 +5,9 @@ import { Button } from "@material-tailwind/react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import RoomIcon from "@mui/icons-material/Room";
 import TodayIcon from "@mui/icons-material/Today";
+import CountCard from "../../components/cards/CountCard";
+import Tag from "../../components/tags/Tag";
+import AboutCard from "../../components/cards/AboutCard";
 
 const Profile = () => {
   return (
@@ -45,7 +48,7 @@ const Profile = () => {
                 </Button>
               </div>
             </div>
-            <div className="user-info-sec pb-5 border-b` flex flex-col lg:flex-row md:flex-row lg:justify-between">
+            <div className="user-info-sec pb-5 border-b flex flex-col lg:flex-row md:flex-row lg:justify-between">
               <div className="lg:w-1/2">
                 <h4 className="text-2xl font-semibold">Full name</h4>
                 <p className="font-base text-wrap text-gray-800 w-full">
@@ -53,7 +56,9 @@ const Profile = () => {
                   Deserunt ratione ab odio.
                 </p>
                 <div className="flex gap-3">
-                  <p className="text-sm text-gray-700 font-normal">@Username</p>
+                  <p className="text-sm text-gray-700 font-normal">
+                    <span>@</span>Username
+                  </p>
                   <div className="flex gap-1 items-center">
                     <RoomIcon sx={{ color: "gray", fontSize: "18px" }} />
                     <p className="text-sm text-gray-700 font-normal">
@@ -69,22 +74,45 @@ const Profile = () => {
                 </div>
               </div>
               <div className="lg:w-1/2 flex lg:justify-end gap-4 mt-3 lg:mt-0">
-                <div className="side-card-1 h-24 w-40 bg-blue-100 rounded flex flex-col items-center justify-center">
-                  <div>
-                    <p
-                      className="font-medium text-3xl text-blue-900"
-                    >
-                      32
-                    </p>
-                    <p className="text-xl">Blogs</p>
-                  </div>
-                </div>
-                <div className="side-card-1 h-24 w-40 bg-purple-50 rounded flex flex-col items-center justify-center">
-                  <div>
-                    <p className="font-medium text-3xl text-pink-900">5+</p>
-                    <p className="text-xl">Featured</p>
-                  </div>
-                </div>
+                <CountCard
+                  bgColor={"bg-blue-50"}
+                  title={"Blogs"}
+                  count={"32"}
+                  countColor={"text-blue-900"}
+                />
+                <CountCard
+                  bgColor={"bg-purple-50"}
+                  title={"Featured"}
+                  count={"5+"}
+                  countColor={"text-pink-900"}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="profile-main-bot flex justify-center px-4 lg:px-0">
+          <div className="container flex lg:flex-row flex-col justify-between gap-0 lg:gap-8">
+            <div className="about-sec w-full lg:w-3/5">
+              <p className="text-gray-800 text-lg font-medium mt-4">About</p>
+              <AboutCard
+                aboutText={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
+                  consequuntur quisquam, harum quae eum doloribus quo fugiat eaque veniam
+                  repellendus consectetur quas, ducimus minima, quidem optio corrupti
+                  pariatur excepturi tempore.`}
+                img={
+                  "https://images.unsplash.com/photo-1598770220477-cec551a23f53?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                }
+              />
+            </div>
+            <div className="interest-sec w-full lg:w-2/5">
+              <p className="text-gray-800 text-lg font-medium mt-4 ">
+                Interests
+              </p>
+              <div className="flex flex-wrap gap-2 mt-3">
+                <Tag tagContent={"MongoDB"} />
+                <Tag tagContent={"React.js"} />
+                <Tag tagContent={"Next.js"} />
+                <Tag tagContent={"SQL"} />
               </div>
             </div>
           </div>
