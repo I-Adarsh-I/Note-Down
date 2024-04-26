@@ -92,27 +92,32 @@ const Profile = () => {
         </div>
         <div className="profile-main-bot flex justify-center px-4 lg:px-0">
           <div className="container flex lg:flex-row flex-col justify-between gap-0 lg:gap-8">
-            <div className="about-sec w-full lg:w-3/5">
-              <p className="text-gray-800 text-lg font-medium mt-4">About</p>
-              <AboutCard
-                aboutText={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
+            <div className="blog-sec w-full lg:w-3/5">
+              <p className="text-gray-800 text-lg font-medium mt-4">
+                All Blogs
+              </p>
+              
+            </div>
+            <div className="interest-sec w-full lg:w-1/3 border-l px-5">
+              <p className="text-gray-800 text-lg font-medium mt-4 ">
+                About
+              </p>
+              <div className="flex flex-col gap-2">
+                <AboutCard
+                  aboutText={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
                   consequuntur quisquam, harum quae eum doloribus quo fugiat eaque veniam
                   repellendus consectetur quas, ducimus minima, quidem optio corrupti
                   pariatur excepturi tempore.`}
-                img={
-                  "https://images.unsplash.com/photo-1598770220477-cec551a23f53?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                }
-              />
-            </div>
-            <div className="interest-sec w-full lg:w-2/5">
-              <p className="text-gray-800 text-lg font-medium mt-4 ">
-                Interests
-              </p>
-              <div className="flex flex-wrap gap-2 mt-3">
-                <Tag tagContent={"MongoDB"} />
-                <Tag tagContent={"React.js"} />
-                <Tag tagContent={"Next.js"} />
-                <Tag tagContent={"SQL"} />
+                  img={
+                    "https://images.unsplash.com/photo-1598770220477-cec551a23f53?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  }
+                />
+                <div className="flex flex-wrap gap-2">
+                  <Tag tagContent={"MongoDB"} />
+                  <Tag tagContent={"React.js"} />
+                  <Tag tagContent={"Next.js"} />
+                  <Tag tagContent={"SQL"} />
+                </div>
               </div>
             </div>
           </div>
