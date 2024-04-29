@@ -1,8 +1,8 @@
 import React from "react";
 
-const Tag = ({tagContent}) => {
+const Tag = ({tagContent, fontSize}) => {
   return (
-      <span className="border rounded-full border-gray-300 px-3 py-1 w-max">
+      <span className={`border rounded-full border-blue-200 px-3 py-1 w-max ${fontSize}`}>
         {tagContent}
       </span>
   );
