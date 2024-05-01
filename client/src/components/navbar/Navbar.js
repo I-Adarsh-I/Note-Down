@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   Navbar,
-  MobileNav,
   Typography,
   Button,
   IconButton,
@@ -81,7 +80,6 @@ const NavbarTop = () => {
             >
               {openNav ? (
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   className="h-6 w-6"
                   viewBox="0 0 24 24"
@@ -96,7 +94,6 @@ const NavbarTop = () => {
                 </svg>
               ) : (
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
                   fill="none"
                   stroke="currentColor"
