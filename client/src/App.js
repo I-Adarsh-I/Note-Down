@@ -4,17 +4,17 @@ import Login from "./pages/auth/Login";
 import Wait from "./pages/wait page/Wait";
 import Register from "./pages/auth/Register";
 import Profile from "./pages/profile/Profile";
-import Home from "./pages/home/Home";
+import AllBlogs from "./pages/all_blogs/AllBlogs";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element = {<Wait />} />
-        <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/allblogs" element={<AllBlogs />} />
       </Routes>
     </div>
   );
