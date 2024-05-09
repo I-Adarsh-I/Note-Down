@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import NavbarTop from "../../components/navbar/Navbar";
 import HomeBlogCard from "../../components/cards/HomeBlogCard";
 
@@ -23,9 +23,9 @@ const AllBlogs = () => {
               </p>
               <div className="flex justify-center">
                 <div className="home-blog-cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-8 lg:gap-x-20 lg:gap-y-6">
-                  <HomeBlogCard />
-                  <HomeBlogCard />
-                  <HomeBlogCard />
+                  <HomeBlogCard cardWidth={"max-w-[24rem]"} />
+                  <HomeBlogCard cardWidth={"max-w-[24rem]"} />
+                  <HomeBlogCard cardWidth={"max-w-[24rem]"} />
                 </div>
               </div>
             </div>
@@ -37,7 +37,7 @@ const AllBlogs = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default AllBlogs
+export default AllBlogs;

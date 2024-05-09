@@ -9,17 +9,25 @@ import {
 } from "@material-tailwind/react";
 import Tag from "../tags/Tag";
 
-const HomeBlogCard = () => {
+const HomeBlogCard = ({ cardWidth }) => {
   return (
+    // max-w-[24rem]
     <div>
-      <Card className="w-full lg:max-w-[24rem] overflow-hidden my-4">
+      <Card className={`w-full lg:${cardWidth} overflow-hidden my-4`}>
         <CardHeader
           floated={false}
           shadow={false}
           color="transparent"
           className="m-0 rounded-none"
         >
-            <div className="flex gap-2 p-4">
+          <img
+            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+            alt="ui/ux review check"
+            className="pb-4"
+          />
+        </CardHeader>
+        <CardBody className="pt-0 pb-4 px-4">
+          <div className="flex gap-2 pb-2">
             <Avatar
               size="sm"
               variant="circular"
@@ -36,30 +44,6 @@ const HomeBlogCard = () => {
               </Typography>
             </div>
           </div>
-          <img
-            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-            alt="ui/ux review check"
-            className="pb-4"
-          />
-        </CardHeader>
-        <CardBody className="pt-0 pb-4 px-4">
-          {/* <div className="flex gap-2 pb-2">
-            <Avatar
-              size="sm"
-              variant="circular"
-              alt="natali craig"
-              src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1061&q=80"
-              className="border-2 border-white hover:z-10"
-            />
-            <div className="flex flex-col justify-start">
-              <Typography variant="small" color="black">
-                Full Name
-              </Typography>
-              <Typography variant="small" color="gray" className="text-xs">
-                Apr, 20
-              </Typography>
-            </div>
-          </div> */}
           <Typography variant="h4" color="blue-gray">
             UI/UX Review Check
           </Typography>
