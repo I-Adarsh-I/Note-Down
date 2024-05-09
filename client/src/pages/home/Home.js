@@ -71,7 +71,7 @@ const Home = () => {
                   <Button className="capitalize w-max">Connect with me</Button>
                 </div>
                 <p className="text-gray-800 text-lg font-medium mt-4 ">
-                  Recommended topics
+                  Categories
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Tag tagContent={"MongoDB"} fontSize={"text-sm"} />
