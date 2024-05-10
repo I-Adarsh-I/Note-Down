@@ -4,16 +4,17 @@ import HomeBlogCard from "../../components/cards/HomeBlogCard";
 import Tag from "../../components/tags/Tag";
 import { Button } from "@material-tailwind/react";
 import { Avatar } from "@mui/material";
+import HomeHeroSec from "../../components/sections/HomeHeroSec";
 
 const Home = () => {
   return (
     <>
       <NavbarTop />
       <div className="home-page-hero w-full flex flex-col items-center">
-        <div className="container w-full lg:h-screen flex flex-col items-center justify-center gap-3 lg:gap-5 pt-24 mb-8 px-2 lg:px-0">
-            <p className="text sm bg-blue-100 p-2 px-4 rounded-full border border-blue-500 text-sm">
-              Lorem ipsum dolor sit amet.
-            </p>
+        {/* <div className="container w-full lg:h-screen flex flex-col items-center justify-center gap-3 lg:gap-5 pt-24 mb-8 px-2 lg:px-0">
+          <p className="text sm bg-blue-100 p-2 px-4 rounded-full border border-blue-500 text-sm">
+            Lorem ipsum dolor sit amet.
+          </p>
           <div className="hero-home flex flex-col justify-center items-center gap-4">
             <h1 className="font-semibold text-center text-3xl lg:text-6xl md:text-4xl">
               Lorem ipsum dolor sit amet consectetur adipisicing elit - Ratione,
@@ -28,11 +29,15 @@ const Home = () => {
             <Button className="capitalize text-xs lg:text-sm font-normal">
               Write Blog
             </Button>
-            <Button className="capitalize bg-white text-black border border-gray-300 text-xs lg:text-sm font-normal">
+            <Button
+              variant="outlined"
+              className="capitalize bg-white border border-gray-300 text-xs lg:text-sm font-normal"
+            >
               Show all blogs
             </Button>
           </div>
-        </div>
+        </div> */}
+        <HomeHeroSec />
         <div className="home-main-bot flex justify-center px-4 lg:px-0">
           <div className="container flex lg:flex-row flex-col-reverse justify-between gap-0 lg:gap-8">
             <div className="blog-sec w-full lg:w-2/3">
