@@ -19,20 +19,9 @@ const Write = () => {
   return (
     <>
       <NavbarTop />
-      <div className="container mt-56">
-        <div className="w-screen flex flex-col items-center">
-          <ReactQuill
-            ref={quillRef}
-            theme="snow"
-            value={editorHtml}
-            onChange={setEditorHtml}
-            modules={{
-              toolbar: toolbarOptions,
-            }}
-          />
-          <Button onClick={() => console.log(editorHtml)} color="black">
-            Save
-          </Button>
+      <div className="w-full flex justify-center">
+        <div className="container pt-20">
+          <p className="text-lg">Hello world</p>
         </div>
       </div>
     </>
