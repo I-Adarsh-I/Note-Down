@@ -1,3 +1,9 @@
 body{
     background-color: #f5f5f5;
 }
+input:focus-visible{
+    outline: none;
+}
+textarea:focus-visible{
+    outline: none;
+}
