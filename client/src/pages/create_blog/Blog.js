@@ -1,6 +1,6 @@
 import React from "react";
 import NavbarTop from "../../components/navbar/Navbar";
-import { Avatar, Typography } from "@material-tailwind/react";
+import { Avatar, Button, Typography } from "@material-tailwind/react";
 import Tag from "../../components/tags/Tag";
 
 const Blog = () => {
@@ -67,7 +67,35 @@ const Blog = () => {
               <p className="text-base text-gray-700">{content.description}</p>
             </div>
           </div>
-          <div className="r-con hidden lg:block lg:w-4/12">right</div>
+          <div className="r-con hidden lg:block lg:w-4/12">
+            <div className="about-dev hidden lg:flex flex-col gap-2 justify-center rounded-xl bg-white border border-gray-300 p-2 py-4">
+              <div className="flex items-center gap-2">
+                <Avatar
+                  alt="Remy Sharp"
+                  src="https://img.freepik.com/free-photo/medium-shot-male-flight-attendant-posing_23-2150312701.jpg"
+                  sx={{
+                    width: 48,
+                    height: 48,
+                  }}
+                />
+                <h3 className="text-lg font-medium">Full Name</h3>
+              </div>
+              <Button className="capitalize">Follow</Button>
+              <p className="text-base text-gray-700">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Exercitationem commodi,
+              </p>
+              <p className="text-base text-gray-700">
+                <b>Joined: </b> DD/MM/YYYY
+              </p>
+              <p className="text-base text-gray-700">
+                <b>Work: </b> MERN Stack developer
+              </p>
+              <p className="text-base text-gray-700">
+                <b>Location: </b> XYZ-50 ABC
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </>
