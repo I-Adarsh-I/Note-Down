@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const HomeHeroSec = () => {
   return (
@@ -19,7 +20,9 @@ const HomeHeroSec = () => {
         </div>
         <div className="home-buttons flex gap-4">
           <Button className="capitalize text-xs lg:text-sm font-normal">
-            Write Blog
+            <Link to={'/createblog'}>
+              Write Blog
+            </Link>
           </Button>
           <Button
             variant="outlined"

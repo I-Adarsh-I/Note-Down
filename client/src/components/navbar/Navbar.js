@@ -25,9 +25,9 @@ const NavbarTop = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <Link to={'/createblog'} className="flex items-center">
           Write
-        </a>
+        </Link>
       </Typography>
 
       <Typography
@@ -36,9 +36,9 @@ const NavbarTop = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <Link to={'/home'} className="flex items-center">
           All blogs
-        </a>
+        </Link>
       </Typography>
     </ul>
   );
@@ -49,10 +49,11 @@ const NavbarTop = () => {
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography
             as="a"
-            href="#"
             className="mr-4 cursor-pointer py-1.5 font-medium"
           >
-            Note Down
+            <Link to={'/home'}>
+              Note Down
+            </Link>
           </Typography>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>

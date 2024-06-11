@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,9 +10,44 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { deepOrange } from "@mui/material/colors";
 import { Divider } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
+  const navigate = useNavigate();
+  const [formFields, setFormFields] = useState({
+    email:'',
+    password:''
+  });
+
+  const handleInputs = (e) => {
+    const {name, value} = e.target;
+    setFormFields((prevState) => ({
+      ...prevState,
+      [name]: value
+    }));
+  }
+
+  const formSubmitHandler = async(e) => {
+    e.preventDefault();
+    const request = {
+      email: formFields.email,
+      password: formFields.password
+    }
+    try {
+      const resp = await axios.post(`${process.env.REACT_APP_BASE_URL}/login`, request)
+      console.log(resp);
+      if(resp.status === 200){
+        toast.success(resp.data.message);
+        localStorage.setItem("Auth token", resp.data.token.token);
+        return navigate('/home');
+      }
+    } catch (err) {
+      return toast.error(err.response.data.error);
+    }
+  }
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <CssBaseline />
@@ -22,7 +57,7 @@ function Login() {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: "url(https://source.unsplash.com/random?wallpapers)",
+          backgroundImage: "url(https://images.unsplash.com/photo-1483095348487-53dbf97d8d5b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
           backgroundRepeat: "no-repeat",
           backgroundColor: (t) =>
             t.palette.mode === "light"
@@ -46,7 +81,7 @@ function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 1 }}>
+          <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={formSubmitHandler}>
             <TextField
               margin="normal"
               required
@@ -54,6 +89,8 @@ function Login() {
               id="email"
               label="Email Address"
               name="email"
+              value={formFields.email}
+              onChange={handleInputs}
               autoComplete="email"
               autoFocus
             />
@@ -62,6 +99,8 @@ function Login() {
               required
               fullWidth
               name="password"
+              value={formFields.password}
+              onChange={handleInputs}
               label="Password"
               type="password"
               id="password"
@@ -108,7 +147,8 @@ function Login() {
           </Box>
         </Box>
       </Grid>
-    </Grid>
+      <ToastContainer />
+    </Grid> 
   );
 }
 
