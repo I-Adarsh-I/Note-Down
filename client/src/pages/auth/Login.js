@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,42 +12,53 @@ import { deepOrange } from "@mui/material/colors";
 import { Divider } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useDispatch, useSelector } from "react-redux";
+import { Spinner } from "@material-tailwind/react";
+import { loginError, loginRequested, loginSuccessfull } from "../../redux/slices/UserSlice";
 
 function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const status = useSelector((state) => state.auth)
   const [formFields, setFormFields] = useState({
-    email:'',
-    password:''
+    email: "",
+    password: "",
   });
 
-  const handleInputs = (e) => {
-    const {name, value} = e.target;
+  const handleInputs = useCallback((e) => {
+    const { name, value } = e.target;
     setFormFields((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
-  }
+  });
 
-  const formSubmitHandler = async(e) => {
+  const formSubmitHandler = async (e) => {
+    dispatch(loginRequested());
     e.preventDefault();
     const request = {
       email: formFields.email,
-      password: formFields.password
-    }
+      password: formFields.password,
+    };
     try {
-      const resp = await axios.post(`${process.env.REACT_APP_BASE_URL}/login`, request)
+      const resp = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/login`,
+        request
+      );
       console.log(resp);
-      if(resp.status === 200){
+      if (resp.status === 200) {
         toast.success(resp.data.message);
         localStorage.setItem("Auth token", resp.data.token.token);
-        return navigate('/home');
+        dispatch(loginSuccessfull(resp.data.user.isExistingUser));
+        return navigate("/home");
       }
     } catch (err) {
+      dispatch(loginError());
       return toast.error(err.response.data.error);
     }
-  }
+  };
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <CssBaseline />
@@ -57,7 +68,8 @@ function Login() {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: "url(https://images.unsplash.com/photo-1483095348487-53dbf97d8d5b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
+          backgroundImage:
+            "url(https://images.unsplash.com/photo-1483095348487-53dbf97d8d5b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
           backgroundRepeat: "no-repeat",
           backgroundColor: (t) =>
             t.palette.mode === "light"
@@ -81,7 +93,12 @@ function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={formSubmitHandler}>
+          <Box
+            component="form"
+            noValidate
+            sx={{ mt: 1 }}
+            onSubmit={formSubmitHandler}
+          >
             <TextField
               margin="normal"
               required
@@ -112,7 +129,13 @@ function Login() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              {status.isLoading ?(
+                <div className="flex justify-center items-cener px-4">
+                  <Spinner className="text-gray-100/50" color="white" />
+                </div>
+              ):"Sign In"}
+              {/* Sign In
+              <Spinner className="h-6 w-6 text-gray-100/50 ms-2" color="white"/> */}
             </Button>
             <Grid container justifyContent="space-between">
               <Grid item>
@@ -121,7 +144,7 @@ function Login() {
                 </Link>
               </Grid>
               <Grid item>
-                <NavLink to={'/register'} className='text-blue-500 text-sm'>
+                <NavLink to={"/register"} className="h-5 w-5 text-blue-500 text-sm">
                   {"Don't have an account? Sign Up"}
                 </NavLink>
               </Grid>
@@ -132,23 +155,23 @@ function Login() {
               </Typography>
             </Divider>
             <Button
-            //   variant="outlined"
+              //   variant="outlined"
               size="large"
               sx={{
                 color: "black",
-                border: '1px solid lightgray',
-                textTransform: 'capitalize',
-                width: '100%'
+                border: "1px solid lightgray",
+                textTransform: "capitalize",
+                width: "100%",
               }}
             >
-                <img className="mr-1" src="/icons/google.png" width={'18px'}/>
+              <img className="mr-1" src="/icons/google.png" width={"18px"} />
               Sign in with Google
             </Button>
           </Box>
         </Box>
       </Grid>
       <ToastContainer />
-    </Grid> 
+    </Grid>
   );
 }
 
