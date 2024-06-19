@@ -81,20 +81,24 @@ const NavbarTop = () => {
                 </>
               ) : (
                 <>
-                  <Button
-                    variant="text"
-                    size="md"
-                    className="hidden lg:inline-block"
-                  >
-                    <Link to={"/login"}>Sign In</Link>
-                  </Button>
-                  <Button
-                    variant="gradient"
-                    size="md"
-                    className="hidden lg:inline-block"
-                  >
-                    <Link to={"/register"}>Register</Link>
-                  </Button>
+                  <Link to={"/login"}>
+                    <Button
+                      variant="text"
+                      size="md"
+                      className="hidden lg:inline-block"
+                    >
+                      Sign In
+                    </Button>
+                  </Link>
+                  <Link to={"/register"}>
+                    <Button
+                      variant="gradient"
+                      size="md"
+                      className="hidden lg:inline-block"
+                    >
+                      Register
+                    </Button>
+                  </Link>
                 </>
               )}
             </div>
@@ -138,13 +142,15 @@ const NavbarTop = () => {
               </>
             ) : (
               <>
-                <Button
-                  variant="gradient"
-                  size="md"
-                  className="inline-block lg:hidden"
-                >
-                  <Link to={"/login"} className="capitalize font-normal">Sign Up</Link>
-                </Button>
+                <Link to={"/login"} className="capitalize font-normal">
+                  <Button
+                    variant="gradient"
+                    size="md"
+                    className="inline-block lg:hidden"
+                  >
+                    Sign Up
+                  </Button>
+                </Link>
               </>
             )}
           </div>
@@ -155,12 +161,16 @@ const NavbarTop = () => {
           ) : (
             <>
               <div className="flex items-center gap-x-1">
-                <Button fullWidth variant="text" size="sm" className="">
-                  <span>Sign In</span>
-                </Button>
-                <Button fullWidth variant="gradient" size="sm" className="">
-                  <span>Register</span>
-                </Button>
+                <Link to={"/login"}>
+                  <Button fullWidth variant="text" size="sm" className="">
+                    <span>Sign In</span>
+                  </Button>
+                </Link>
+                <Link to={"/register"}>
+                  <Button fullWidth variant="gradient" size="sm" className="">
+                    <span>Register</span>
+                  </Button>
+                </Link>
               </div>
             </>
           )}
