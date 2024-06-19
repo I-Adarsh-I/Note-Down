@@ -153,7 +153,7 @@ const Register = () => {
                   width: "100%",
                 }}
               >
-                <img className="mr-1" src="/icons/google.png" width={"18px"} />
+                <img alt="Google" className="mr-1" src="/icons/google.png" width={"18px"} />
                 Register with Google
               </Button>
             </Box>

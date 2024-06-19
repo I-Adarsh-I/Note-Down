@@ -33,7 +33,7 @@ function Login() {
       ...prevState,
       [name]: value,
     }));
-  });
+  },[]);
 
   const formSubmitHandler = async (e) => {
     dispatch(loginRequested());
@@ -164,7 +164,7 @@ function Login() {
                 width: "100%",
               }}
             >
-              <img className="mr-1" src="/icons/google.png" width={"18px"} />
+              <img alt="Google" className="mr-1" src="/icons/google.png" width={"18px"} />
               Sign in with Google
             </Button>
           </Box>
