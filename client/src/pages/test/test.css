@@ -1,0 +1,31 @@
+.quill{
+    /* background-color: #ffffff; */
+    /* border-radius: 8px; */
+    overflow: hidden;
+}
+.ql-toolbar.ql-snow + .ql-container.ql-snow {
+    border: none;
+    background-color: #ffffff;
+    height: 300px;
+    font-size: 22px;
+}
+/* Toolbar */
+.ql-toolbar.ql-snow {
+    /* border-radius: 8px 8px 0 0 ; */
+    border: none;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    padding: 8px;
+    background-color: #f8f8f8;
+}
+/* Toolbar icons */
+.ql-snow.ql-toolbar button, .ql-snow .ql-toolbar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    /* float: left; */
+    height: 26px;
+    padding: 3px 5px;
+    width: 42px;
+}

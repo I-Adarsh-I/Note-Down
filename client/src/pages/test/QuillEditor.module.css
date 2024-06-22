@@ -1,0 +1,105 @@
+.quill{
+    /* background-color: #ffffff; */
+    /* border-radius: 8px; */
+    overflow: hidden;
+}
+.ql-toolbar.ql-snow + .ql-container.ql-snow {
+    border: none;
+    background-color: #ffffff;
+    height: 300px;
+    font-size: 22px;
+}
+/* Toolbar */
+.ql-toolbar.ql-snow {
+    /* border-radius: 8px 8px 0 0 ; */
+    border: none;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    padding: 8px;
+    background-color: #f8f8f8;
+}
+/* Toolbar icons */
+.ql-snow.ql-toolbar button, .ql-snow .ql-toolbar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    /* float: left; */
+    height: 26px;
+    padding: 3px 5px;
+    width: 42px;
+}
+
+/* Headers */
+.quill-content h1 {
+    @apply text-4xl font-bold; /* Example Tailwind classes */
+  }
+  
+  .quill-content h2 {
+    @apply text-3xl font-bold;
+  }
+  
+  .quill-content h3 {
+    @apply text-2xl font-bold;
+  }
+  
+  .quill-content h4 {
+    @apply text-xl font-bold;
+  }
+  
+  .quill-content h5 {
+    @apply text-lg font-bold;
+  }
+  
+  /* Bold text */
+  .quill-content strong {
+    @apply font-bold;
+  }
+  
+  /* Italic text */
+  .quill-content em {
+    @apply italic;
+  }
+  
+  /* Underline */
+  .quill-content u {
+    @apply underline;
+  }
+  
+  /* Strike-through */
+  .quill-content s {
+    @apply line-through;
+  }
+  
+  /* Blockquote */
+  .quill-content blockquote {
+    @apply ml-4 italic border-l-4 border-gray-500 pl-2;
+  }
+  
+  /* Ordered and unordered lists */
+  .quill-content ol {
+    @apply list-decimal ml-4;
+  }
+  
+  .quill-content ul {
+    @apply list-disc ml-4;
+  }
+  
+  /* Indentation */
+  .quill-content .indent-1 {
+    @apply ml-4;
+  }
+  
+  .quill-content .indent-2 {
+    @apply ml-8;
+  }
+  
+  /* Links */
+  .quill-content a {
+    @apply text-blue-600 underline;
+  }
+  
+  /* Clean styles */
+  .quill-content .clean {
+    /* No additional styles */
+  }

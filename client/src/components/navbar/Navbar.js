@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Navbar,
   Typography,
@@ -7,12 +9,39 @@ import {
   Collapse,
   Avatar,
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
+} from "@material-tailwind/react";
+import { Spinner } from "@material-tailwind/react";
+import { logoutRequested, logoutSuccessull } from "../../redux/slices/UserSlice";
+
+const profileMenuItems = [
+  {
+    label: "My Profile",
+    link: "/profile",
+  },
+  {
+    label: "Edit Profile",
+    link: "/profile",
+  },
+  {
+    label: "Sign Out",
+    link: "",
+  },
+];
 
 const NavbarTop = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [openNav, setOpenNav] = useState(false);
-  const userInfo = useSelector((state) => state.auth.isLoggedIn);
+  const userInfo = useSelector((state) => state.auth);
+
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const closeMenu = () => setIsMenuOpen(false);
 
   useEffect(() => {
     window.addEventListener(
@@ -20,6 +49,18 @@ const NavbarTop = () => {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
+
+  const logoutHandler = () => {
+    dispatch(logoutRequested());
+    localStorage.removeItem('persist:root');
+    navigate('/login')
+    dispatch(logoutSuccessull());
+  };
+  useEffect(() => {
+    if (!userInfo.isLoggedIn) {
+      navigate('/login');
+    }
+  }, [userInfo.isLoggedIn, navigate]);
 
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -44,16 +85,6 @@ const NavbarTop = () => {
           All blogs
         </Link>
       </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <Link to={"/profile"} className="flex items-center">
-          Profile
-        </Link>
-      </Typography>
     </ul>
   );
 
@@ -67,17 +98,62 @@ const NavbarTop = () => {
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
-              {userInfo ? (
+              {userInfo.isLoggedIn ? (
                 <>
-                  <Link to={"/profile"}>
-                    <Avatar
-                      size="sm"
-                      variant="circular"
-                      alt="natali craig"
-                      src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1061&q=80"
-                      className="hidden lg:inline-block border-2 border-white cursor-pointer"
-                    />
-                  </Link>
+                  <Menu
+                    open={isMenuOpen}
+                    handler={setIsMenuOpen}
+                    placement="bottom-end"
+                  >
+                    <MenuHandler>
+                      <Button
+                        variant="text"
+                        color="blue-gray"
+                        className="flex items-center rounded-full p-0"
+                      >
+                        <Avatar
+                          variant="circular"
+                          size="sm"
+                          alt={userInfo.fullname}
+                          className="p-0"
+                          src={userInfo.profileImg}
+                        />
+                      </Button>
+                    </MenuHandler>
+                    <MenuList className="p-1">
+                      {profileMenuItems.map(({ label, link }, key) => {
+                        const isLastItem = key === profileMenuItems.length - 1;
+                        return (
+                          <MenuItem
+                            key={label}
+                            onClick={closeMenu}
+                            className={`flex items-center gap-2 rounded w-full ${
+                              isLastItem
+                                ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
+                                : ""
+                            }`}
+                          >
+                            <Link to={link} className="flex gap-2 items-center">
+                              <Typography
+                                as="span"
+                                variant="small"
+                                className="font-normal"
+                                color={isLastItem ? "red" : "inherit"}
+                                onClick={isLastItem ? logoutHandler : () => {}}
+                              >
+                                {label}
+                              </Typography>
+                              {isLastItem && userInfo.isLoading ? (
+                                <Spinner className="h-4 w-4" color="red" />
+                              ) : (
+                                ""
+                              )}
+                            </Link>
+                          </MenuItem>
+                        );
+                      })}
+                    </MenuList>
+                  </Menu>
                 </>
               ) : (
                 <>
@@ -102,7 +178,7 @@ const NavbarTop = () => {
                 </>
               )}
             </div>
-            {userInfo ? (
+            {userInfo.isLoggedIn ? (
               <>
                 <IconButton
                   variant="text"
@@ -156,7 +232,7 @@ const NavbarTop = () => {
           </div>
         </div>
         <Collapse open={openNav}>
-          {userInfo ? (
+          {userInfo.isLoggedIn ? (
             <>{navList}</>
           ) : (
             <>

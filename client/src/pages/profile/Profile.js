@@ -9,8 +9,10 @@ import CountCard from "../../components/cards/CountCard";
 import Tag from "../../components/tags/Tag";
 import AboutCard from "../../components/cards/AboutCard";
 import ProfileBlogCard from "../../components/cards/ProfileBlogCard";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
+  const userInfo = useSelector(state => state.auth.user);
   return (
     <div className="mt-20">
       <NavbarTop />
@@ -21,8 +23,8 @@ const Profile = () => {
             <div className="avatar flex justify-between w-full h-16">
               <div>
                 <Avatar
-                  alt="Remy Sharp"
-                  src="https://img.freepik.com/free-photo/medium-shot-male-flight-attendant-posing_23-2150312701.jpg"
+                  alt={userInfo.fullname}
+                  src={userInfo.profileImg}
                   sx={{
                     width: 108,
                     height: 108,
@@ -50,14 +52,14 @@ const Profile = () => {
             </div>
             <div className="user-info-sec pb-5 border-b border-gray-300 flex flex-col lg:flex-row md:flex-row lg:justify-between">
               <div className="lg:w-1/2">
-                <h4 className="text-2xl font-semibold">Full name</h4>
+                <h4 className="text-2xl font-semibold">{userInfo && userInfo.fullname}</h4>
                 <p className="font-base text-wrap text-gray-800 w-full">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Deserunt ratione ab odio.
                 </p>
                 <div className="flex gap-3">
                   <p className="text-sm text-gray-700 font-normal">
-                    <span>@</span>Username
+                    <span>@</span>{userInfo.fullname}
                   </p>
                   <div className="flex gap-1 items-center">
                     <RoomIcon sx={{ color: "gray", fontSize: "18px" }} />

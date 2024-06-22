@@ -2,8 +2,11 @@ import React from "react";
 import Tag from "../tags/Tag";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Avatar } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const ProfileBlogCard = () => {
+  const userInfo = useSelector(state => state.auth.user);
+
   return (
     <div className="blog-card-1 bg-white h-max p-3 flex flex-col gap-3 rounded-md border border-gray-300">
       <div className="card-head flex gap-2">
@@ -21,7 +24,7 @@ const ProfileBlogCard = () => {
         <div className="flex justify-between w-full">
           <div className="flex items-center gap-2">
             <div className="name-sec">
-              <p>Full name</p>
+              <p>{userInfo.fullname}</p>
               <p className="text-xs text-gray-700">Apr 29</p>
             </div>
           </div>
