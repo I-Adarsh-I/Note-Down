@@ -7,7 +7,6 @@ import Profile from "./pages/profile/Profile";
 import Home from './pages/home/Home'
 import Write from "./pages/create_blog/Write";
 import Blog from "./pages/create_blog/Blog";
-import Test from "./pages/test/Test";
 
 function App() {
   return (
@@ -20,7 +19,6 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/createblog" element={<Write />} />
         <Route path="/blogpost" element={<Blog />} />
-        <Route path="/test" element={<Test />}/>
       </Routes>
     </div>
   );

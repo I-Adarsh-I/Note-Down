@@ -1,6 +1,4 @@
 .quill{
-    /* background-color: #ffffff; */
-    /* border-radius: 8px; */
     overflow: hidden;
 }
 .ql-toolbar.ql-snow + .ql-container.ql-snow {
@@ -24,8 +22,12 @@
     border: none;
     cursor: pointer;
     display: inline-block;
-    /* float: left; */
     height: 26px;
     padding: 3px 5px;
     width: 42px;
 }
+/* Placeholder design */
+.ql-editor.ql-blank::before {
+    color: #a2a2a2;
+    font-style: normal;
+  }

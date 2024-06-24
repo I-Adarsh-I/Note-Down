@@ -54,7 +54,7 @@ const ProfileBlogCard = () => {
         </div>
         <div className="comments">
           <p className="text-sm">
-            <i class="fa-regular fa-comment fa-lg pe-1 text-gray-600 cursor-pointer"></i>
+            <i className="fa-regular fa-comment fa-lg pe-1 text-gray-600 cursor-pointer"></i>
             12 Comments
           </p>
         </div>
