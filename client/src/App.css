@@ -7,3 +7,12 @@ input:focus-visible{
 textarea:focus-visible{
     outline: none;
 }
+.truncate-by-height {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 6rem;
+    line-height: 1.5rem;
+    -webkit-line-clamp: 4;
+  }

@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavbarTop from "../../components/navbar/Navbar";
 import HomeBlogCard from "../../components/cards/HomeBlogCard";
 import Tag from "../../components/tags/Tag";
 import { Button } from "@material-tailwind/react";
 import { Avatar } from "@mui/material";
 import HomeHeroSec from "../../components/sections/HomeHeroSec";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 const Home = () => {
+  const [allBlogData, setAllBlogData] = useState();
+
+  const getAllBlogs = async () => {
+    try {
+      const resp = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/allblogs`
+      );
+      setAllBlogData(resp.data);
+    } catch (err) {
+      console.error(err);
+      toast.error(err.response.data.error);
+    }
+  };
+
+  useEffect(() => {
+    getAllBlogs();
+  }, []);
+  useEffect(() => {
+    console.log(allBlogData)
+
+  })
   return (
     <>
       <NavbarTop />
@@ -18,20 +41,14 @@ const Home = () => {
               <p className="text-gray-800 text-lg font-medium">All Blogs</p>
               <div className="flex justify-center">
                 <div className="home-blog-cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-x-8 lg:gap-x-20 lg:gap-y-6">
-                  <HomeBlogCard cardWidth={"max-w-[24rem]"} />
-                  <HomeBlogCard cardWidth={"max-w-[24rem]"} />
-                  <HomeBlogCard cardWidth={"max-w-[24rem]"} />
-                  <HomeBlogCard cardWidth={"max-w-[24rem]"} />
-                  <HomeBlogCard cardWidth={"max-w-[24rem]"} />
-                  <HomeBlogCard cardWidth={"max-w-[24rem]"} />
-                  <HomeBlogCard cardWidth={"max-w-[24rem]"} />
-                  <HomeBlogCard cardWidth={"max-w-[24rem]"} />
-                  <HomeBlogCard cardWidth={"max-w-[24rem]"} />
-                  <HomeBlogCard cardWidth={"max-w-[24rem]"} />
-                  <HomeBlogCard cardWidth={"max-w-[24rem]"} />
-                  <HomeBlogCard cardWidth={"max-w-[24rem]"} />
-                  <HomeBlogCard cardWidth={"max-w-[24rem]"} />
-                  <HomeBlogCard cardWidth={"max-w-[24rem]"} />
+                  {allBlogData &&
+                    allBlogData.Blogs.map((blogData, key) => {
+                      return (
+                        <>
+                          <HomeBlogCard blog={blogData} cardWidth={"max-w-[24rem]"} />
+                        </>
+                      );
+                    })}
                 </div>
               </div>
             </div>
@@ -82,6 +99,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

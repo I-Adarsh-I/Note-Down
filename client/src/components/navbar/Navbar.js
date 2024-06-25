@@ -16,7 +16,10 @@ import {
   MenuList,
 } from "@material-tailwind/react";
 import { Spinner } from "@material-tailwind/react";
-import { logoutRequested, logoutSuccessull } from "../../redux/slices/UserSlice";
+import {
+  logoutRequested,
+  logoutSuccessull,
+} from "../../redux/slices/UserSlice";
 
 const profileMenuItems = [
   {
@@ -52,13 +55,13 @@ const NavbarTop = () => {
 
   const logoutHandler = () => {
     dispatch(logoutRequested());
-    localStorage.removeItem('persist:root');
-    navigate('/login')
+    localStorage.removeItem("persist:root");
+    navigate("/login");
     dispatch(logoutSuccessull());
   };
   useEffect(() => {
     if (!userInfo.isLoggedIn) {
-      navigate('/login');
+      navigate("/login");
     }
   }, [userInfo.isLoggedIn, navigate]);
 
@@ -124,16 +127,15 @@ const NavbarTop = () => {
                       {profileMenuItems.map(({ label, link }, key) => {
                         const isLastItem = key === profileMenuItems.length - 1;
                         return (
-                          <MenuItem
-                            key={label}
-                            onClick={closeMenu}
-                            className={`flex items-center gap-2 rounded w-full ${
-                              isLastItem
-                                ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-                                : ""
-                            }`}
-                          >
-                            <Link to={link} className="flex gap-2 items-center">
+                          <Link to={link} key={label} className="flex gap-2 items-center">
+                            <MenuItem
+                              onClick={closeMenu}
+                              className={`flex items-center gap-2 rounded w-full ${
+                                isLastItem
+                                  ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
+                                  : ""
+                              }`}
+                            >
                               <Typography
                                 as="span"
                                 variant="small"
@@ -148,8 +150,8 @@ const NavbarTop = () => {
                               ) : (
                                 ""
                               )}
-                            </Link>
-                          </MenuItem>
+                            </MenuItem>
+                          </Link>
                         );
                       })}
                     </MenuList>

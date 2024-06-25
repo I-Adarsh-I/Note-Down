@@ -9,11 +9,11 @@ import {
 } from "@material-tailwind/react";
 import Tag from "../tags/Tag";
 
-const HomeBlogCard = ({ cardWidth }) => {
+const HomeBlogCard = ({ cardWidth,blog }) => {
   return (
     // max-w-[24rem]
     <div>
-      <Card className={`w-full lg:${cardWidth} overflow-hidden my-4`}>
+      <Card className={`w-full lg:${cardWidth} overflow-hidden my-4 rounded-lg`}>
         <CardHeader
           floated={false}
           shadow={false}
@@ -37,10 +37,10 @@ const HomeBlogCard = ({ cardWidth }) => {
             />
             <div className="flex flex-col justify-start">
               <Typography variant="small" color="black">
-                Full Name
+                {blog.author.fullname}
               </Typography>
               <Typography variant="small" color="gray" className="text-xs">
-                Apr, 20
+                {blog.postedAt}
               </Typography>
             </div>
           </div>
@@ -49,11 +49,9 @@ const HomeBlogCard = ({ cardWidth }) => {
           </Typography>
           <Typography
             color="gray"
-            className="mt-1 font-sm font-normal leading-tight"
-          >
-            Because it&apos;s about motivating the doers. Because I&apos;m here
-            to follow my dreams and inspire others.
-          </Typography>
+            className="mt-1 font-sm font-normal leading-tight truncate-by-height max-h-32 text-pretty overflow-hidden"
+            dangerouslySetInnerHTML={{ __html: blog.blogContent }}
+          />
           <div className="w-full flex gap-2 flex-wrap pt-2">
             <Tag fontSize={"text-xs"} tagContent={"Sample"} />
             <Tag fontSize={"text-xs"} tagContent={"Sample"} />
