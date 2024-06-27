@@ -44,9 +44,9 @@ const Home = () => {
                   {allBlogData &&
                     allBlogData.Blogs.map((blogData, key) => {
                       return (
-                        <>
+                        <div key={blogData._id}>
                           <HomeBlogCard blog={blogData} cardWidth={"max-w-[24rem]"} />
-                        </>
+                        </div>
                       );
                     })}
                 </div>

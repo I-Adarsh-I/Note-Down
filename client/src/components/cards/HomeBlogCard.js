@@ -8,12 +8,14 @@ import {
   Avatar,
 } from "@material-tailwind/react";
 import Tag from "../tags/Tag";
+import { useNavigate } from "react-router-dom";
 
 const HomeBlogCard = ({ cardWidth,blog }) => {
+  const navigate = useNavigate();
   return (
     // max-w-[24rem]
     <div>
-      <Card className={`w-full lg:${cardWidth} overflow-hidden my-4 rounded-lg`}>
+      <Card className={`w-full lg:${cardWidth} overflow-hidden my-4 rounded-lg cursor-pointer hover:drop-shadow`} onClick={() => navigate(`/blogpost/${blog._id}`)}>
         <CardHeader
           floated={false}
           shadow={false}

@@ -32,23 +32,26 @@
 
 /* Headers */
 .quill-content h1 {
-    @apply text-4xl font-bold; /* Example Tailwind classes */
+    @apply text-4xl font-bold mb-4;
   }
   
   .quill-content h2 {
-    @apply text-3xl font-bold;
+    @apply text-3xl font-bold mb-3;
   }
   
   .quill-content h3 {
-    @apply text-2xl font-bold;
+    @apply text-2xl font-bold mb-3;
   }
   
   .quill-content h4 {
-    @apply text-xl font-bold;
+    @apply text-xl font-bold mb-2;
   }
   
   .quill-content h5 {
-    @apply text-lg font-bold;
+    @apply text-lg font-bold mb-1;
+  }
+  .quill-content p {
+    @apply text-base text-gray-700 leading-6;
   }
   
   /* Bold text */
@@ -78,7 +81,7 @@
   
   /* Ordered and unordered lists */
   .quill-content ol {
-    @apply list-decimal ml-4;
+    @apply list-decimal ml-4 ;
   }
   
   .quill-content ul {
@@ -96,7 +99,7 @@
   
   /* Links */
   .quill-content a {
-    @apply text-blue-600 underline;
+    @apply text-blue-600;
   }
   
   /* Clean styles */

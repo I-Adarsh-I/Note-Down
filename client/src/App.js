@@ -18,7 +18,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/createblog" element={<Write />} />
-        <Route path="/blogpost" element={<Blog />} />
+        <Route path="/blogpost/:_id" element={<Blog />} />
       </Routes>
     </div>
   );
