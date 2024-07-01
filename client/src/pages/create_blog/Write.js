@@ -19,7 +19,7 @@ const Write = () => {
 
   const modules = {
     toolbar: [
-      [{ header: [1, 2, 3, 4, 5, false] }],
+      [{ header: [2, 3, 4, 5, false] }],
       ["bold", "italic", "underline", "strike", "blockquote"],
       [
         { list: "ordered" },
@@ -77,7 +77,7 @@ const Write = () => {
       console.log(resp);
       if (resp.status === 201) {
         toast.success(resp.data.message);
-        return navigate("/profile");
+        return navigate("/home");
       }
     } catch (err) {
       toast.error(err.response.data.error);

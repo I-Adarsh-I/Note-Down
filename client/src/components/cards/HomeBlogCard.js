@@ -9,13 +9,16 @@ import {
 } from "@material-tailwind/react";
 import Tag from "../tags/Tag";
 import { useNavigate } from "react-router-dom";
+import moment from "moment/moment";
 
 const HomeBlogCard = ({ cardWidth,blog }) => {
   const navigate = useNavigate();
+
   return (
     // max-w-[24rem]
+    // onClick={() => navigate(`/blogpost/${blog._id}`)}
     <div>
-      <Card className={`w-full lg:${cardWidth} overflow-hidden my-4 rounded-lg cursor-pointer hover:drop-shadow`} onClick={() => navigate(`/blogpost/${blog._id}`)}>
+      <Card className={`w-full lg:${cardWidth} overflow-hidden my-4 rounded-lg cursor-pointer hover:drop-shadow`}>
         <CardHeader
           floated={false}
           shadow={false}
@@ -29,7 +32,9 @@ const HomeBlogCard = ({ cardWidth,blog }) => {
           />
         </CardHeader>
         <CardBody className="pt-0 pb-4 px-4">
-          <div className="flex gap-2 pb-2">
+          <div className="flex gap-2 pb-2" onClick={() => {
+            navigate(`/profile/${blog.author._id}`)
+          }}>
             <Avatar
               size="sm"
               variant="circular"
@@ -42,17 +47,18 @@ const HomeBlogCard = ({ cardWidth,blog }) => {
                 {blog.author.fullname}
               </Typography>
               <Typography variant="small" color="gray" className="text-xs">
-                {blog.postedAt}
+                {moment(blog.postedAt).format("ll")}
               </Typography>
             </div>
           </div>
-          <Typography variant="h4" color="blue-gray">
+          <Typography variant="h4" color="blue-gray"  onClick={() => navigate(`/blogpost/${blog._id}`)}>
             UI/UX Review Check
           </Typography>
           <Typography
             color="gray"
             className="mt-1 font-sm font-normal leading-tight truncate-by-height max-h-32 text-pretty overflow-hidden"
             dangerouslySetInnerHTML={{ __html: blog.blogContent }}
+            onClick={() => navigate(`/blogpost/${blog._id}`)}
           />
           <div className="w-full flex gap-2 flex-wrap pt-2">
             <Tag fontSize={"text-xs"} tagContent={"Sample"} />
@@ -65,13 +71,13 @@ const HomeBlogCard = ({ cardWidth,blog }) => {
             <div className="applauds">
               <p className="text-sm text-center">
                 <i className="fa-solid fa-hands-clapping fa-lg pe-1 text-gray-600 cursor-pointer"></i>
-                11
+                {blog.likes.length}
               </p>
             </div>
             <div className="comments">
               <p className="text-sm">
                 <i className="fa-regular fa-comment fa-lg pe-1 text-gray-600 cursor-pointer"></i>
-                12
+                {blog.comments.length}
               </p>
             </div>
           </div>

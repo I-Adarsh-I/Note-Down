@@ -1,26 +1,19 @@
 var mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const blogContentSchema = new mongoose.Schema({
-    blogTitle: {
-      type: String,
-      required: true,
-    },
-    blogSubTitle: String,
-    description: {
-      type: String,
-      required: true,
-    },
-    blogImg: String,
-    additionalLinks: String,
-  });
-
 const blogSchema = mongoose.Schema({
   author: {
     type: ObjectId,
     ref: 'User',
   },
-  blogContent: blogContentSchema,
+  blogTitle:{
+    type:String,
+    required:true
+  },
+  blogContent: {
+    type: String,
+    required: true
+  },
   tags: [
     {
       type: String,

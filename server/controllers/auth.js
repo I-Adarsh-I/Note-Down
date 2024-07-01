@@ -8,6 +8,9 @@ module.exports.registerUser = async (req, res) => {
   try {
     const { fullname, email, password } = req.body;
 
+    if (!fullname || !email || !password)
+      return res.status(400).json({ error: "One or more empty fields" });
+
     const isExistingUser = await userModel.findOne({ email });
     if (isExistingUser) {
       return res
@@ -47,7 +50,7 @@ module.exports.loginUser = async (req, res) => {
       return res.status(400).json({ error: "Incorrect password" });
     }
 
-    const token = await jwt.sign(
+    const token = jwt.sign(
       { _id: isExistingUser, email: isExistingUser.email },
       process.env.JWT_SECRET_KEY,
       {
@@ -72,7 +75,7 @@ passport.use(
       clientID: process.env.OAUTH_CLIENT_ID,
       clientSecret: process.env.OAUTH_CLIENT_SECRET,
       callbackURL: "http://localhost:5000/auth/google/callback",
-      scope: ["profile", "email"]
+      scope: ["profile", "email"],
     },
     async (acessToken, refreshToken, profile, done) => {
       try {
@@ -101,11 +104,11 @@ passport.serializeUser(function (user, done) {
 
 // Deserialize user
 passport.deserializeUser(async function (id, done) {
-  const user = await userModel.findById(id)
-  if(user){
-    done(user)
-  }else{
-    console.log("No user found")
+  const user = await userModel.findById(id);
+  if (user) {
+    done(user);
+  } else {
+    console.log("No user found");
   }
 });
 
@@ -114,7 +117,7 @@ module.exports.googleLogin = passport.authenticate("google", {
 });
 
 (module.exports.googleCallback = passport.authenticate("google", {
-  successRedirect: 'http://localhost:3000/profile',
+  successRedirect: "http://localhost:3000/profile",
   failureRedirect: "/login",
 })),
   (req, res) => {
@@ -123,5 +126,7 @@ module.exports.googleLogin = passport.authenticate("google", {
       process.env.JWT_SECRET_KEY,
       { expiresIn: "1d" }
     );
-    res.status(200).json({ message: "User logged in successfully", user: req.user, token });
+    res
+      .status(200)
+      .json({ message: "User logged in successfully", user: req.user, token });
   };

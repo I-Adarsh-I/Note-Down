@@ -29,7 +29,7 @@ module.exports.getUserInfo = async(req, res) => {
     if(!userDetails){
       return res.status(404).json({error: 'User does not exist'});
     }
-    return res.status(200).json({data: userDetails});
+    return res.status(200).json({userDetails});
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "Internal server error" });

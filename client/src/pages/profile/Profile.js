@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import NavbarTop from "../../components/navbar/Navbar";
 import Avatar from "@mui/material/Avatar";
-import { Button } from "@material-tailwind/react";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  Typography,
+} from "@material-tailwind/react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import RoomIcon from "@mui/icons-material/Room";
 import TodayIcon from "@mui/icons-material/Today";
@@ -10,9 +16,45 @@ import Tag from "../../components/tags/Tag";
 import AboutCard from "../../components/cards/AboutCard";
 import ProfileBlogCard from "../../components/cards/ProfileBlogCard";
 import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 const Profile = () => {
-  const userInfo = useSelector(state => state.auth.user);
+  const userInfo = useSelector((state) => state.auth.user);
+  const [user, setUser] = useState([]);
+  const [blogs, setBlogs] = useState([]);
+  const { _id } = useParams();
+
+  const profileHandler = useCallback(async () => {
+    try {
+      const resp = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/user/${_id}`
+      );
+      setUser(resp.data.userDetails);
+    } catch (err) {
+      toast.error(err.response.data.error);
+      console.error(err);
+    }
+  },[_id]);
+
+  const userBlogs = useCallback(async () => {
+    try {
+      const resp = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/allblogsbyuser/${_id}`
+      );
+      setBlogs(resp.data.blogs);
+      // console.log(resp.data.blogs);
+    } catch (err) {
+      console.error(err);
+    }
+  }, [_id]);
+
+  useEffect(() => {
+    profileHandler();
+    userBlogs();
+  }, [profileHandler, userBlogs]);
+
   return (
     <div className="mt-20">
       <NavbarTop />
@@ -23,8 +65,16 @@ const Profile = () => {
             <div className="avatar flex justify-between w-full h-16">
               <div>
                 <Avatar
-                  alt={userInfo.fullname}
-                  src={userInfo.profileImg}
+                  alt={
+                    user._id === userInfo._id
+                      ? userInfo.fullname
+                      : user.fullname
+                  }
+                  src={
+                    user._id === userInfo._id
+                      ? userInfo.profileImg
+                      : user.profileImg
+                  }
                   sx={{
                     width: 108,
                     height: 108,
@@ -52,14 +102,21 @@ const Profile = () => {
             </div>
             <div className="user-info-sec pb-5 border-b border-gray-300 flex flex-col lg:flex-row md:flex-row lg:justify-between">
               <div className="lg:w-1/2">
-                <h4 className="text-2xl font-semibold">{userInfo && userInfo.fullname}</h4>
+                <h4 className="text-2xl font-semibold">
+                  {user._id === userInfo._id
+                    ? userInfo.fullname
+                    : user.fullname}
+                </h4>
                 <p className="font-base text-wrap text-gray-800 w-full">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Deserunt ratione ab odio.
                 </p>
                 <div className="flex gap-3">
                   <p className="text-sm text-gray-700 font-normal">
-                    <span>@</span>{userInfo.fullname}
+                    <span>@</span>
+                    {user._id === userInfo._id
+                      ? userInfo.fullname
+                      : user.fullname}
                   </p>
                   <div className="flex gap-1 items-center">
                     <RoomIcon sx={{ color: "gray", fontSize: "18px" }} />
@@ -77,15 +134,9 @@ const Profile = () => {
               </div>
               <div className="lg:w-1/2 flex lg:justify-end gap-4 mt-3 lg:mt-0">
                 <CountCard
-                  bgColor={"bg-blue-100"}
-                  title={"Blogs"}
-                  count={"32"}
-                  countColor={"text-blue-900"}
-                />
-                <CountCard
                   bgColor={"bg-purple-100"}
-                  title={"Featured"}
-                  count={"5+"}
+                  title={"Blogs"}
+                  count={blogs.length}
                   countColor={"text-pink-900"}
                 />
               </div>
@@ -98,11 +149,60 @@ const Profile = () => {
               <p className="text-gray-800 text-lg font-medium mt-4">
                 All Blogs
               </p>
-              <div className="flex gap-2 flex-col pb-2">
-                <ProfileBlogCard />
-                <ProfileBlogCard />
-                <ProfileBlogCard />
-              </div>
+              {blogs.length === 0 ? (
+                <>
+                  <Card className="my-3 w-96 rounded-lg">
+                    <CardBody className="pb-2">
+                      <img src="/rocket.gif" alt="Get started now" />
+                      <Typography
+                        variant="h5"
+                        color="blue-gray"
+                        className="mb-2"
+                      >
+                        Create Blog
+                      </Typography>
+                      <Typography>
+                        Haven't started yet🤔? <br /> Start writing your blog
+                        now
+                      </Typography>
+                    </CardBody>
+                    <CardFooter className="pt-0">
+                      <Link to={"/createblog"} className="inline-block">
+                        <button className="bg-black no-underline group cursor-pointer relative shadow-2xl shadow-blue-900 rounded-md p-px text-xs font-semibold leading-6 text-white inline-block">
+                          <span className="absolute inset-0 overflow-hidden rounded-full">
+                            <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+                          </span>
+                          <div className="relative flex space-x-2 items-center z-10 rounded-md bg-zinc-950 py-0.5 px-4 ring-1 ring-white/10 ">
+                            <span>{`Create blog`}</span>
+                            <svg
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="1.5"
+                                d="M10.75 8.75L14.25 12L10.75 15.25"
+                              ></path>
+                            </svg>
+                          </div>
+                          <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
+                        </button>
+                      </Link>
+                    </CardFooter>
+                  </Card>
+                </>
+              ) : (
+                <div className="flex gap-2 flex-col pb-2">
+                  {blogs.map((blog, index) => {
+                    return <ProfileBlogCard blog={blog} key={blog._id} />;
+                  })}
+                </div>
+              )}
             </div>
             <div className="about-sec w-full lg:w-1/3 lg:border-l border-gray-300 lg:px-5">
               <p className="text-gray-800 text-lg font-medium mt-4 ">About</p>
@@ -117,16 +217,17 @@ const Profile = () => {
                   }
                 />
                 <div className="flex flex-wrap gap-2">
-                  <Tag tagContent={"MongoDB"} fontSize={'text-sm'}/>
-                  <Tag tagContent={"React.js"} fontSize={'text-sm'}/>
-                  <Tag tagContent={"Next.js"} fontSize={'text-sm'}/>
-                  <Tag tagContent={"SQL"} fontSize={'text-sm'}/>
+                  <Tag tagContent={"MongoDB"} fontSize={"text-sm"} />
+                  <Tag tagContent={"React.js"} fontSize={"text-sm"} />
+                  <Tag tagContent={"Next.js"} fontSize={"text-sm"} />
+                  <Tag tagContent={"SQL"} fontSize={"text-sm"} />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

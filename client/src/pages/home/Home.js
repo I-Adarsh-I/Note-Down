@@ -16,7 +16,7 @@ const Home = () => {
       const resp = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/allblogs`
       );
-      setAllBlogData(resp.data);
+      setAllBlogData(resp.data.Blogs);
     } catch (err) {
       console.error(err);
       toast.error(err.response.data.error);
@@ -26,10 +26,7 @@ const Home = () => {
   useEffect(() => {
     getAllBlogs();
   }, []);
-  useEffect(() => {
-    console.log(allBlogData)
-
-  })
+  
   return (
     <>
       <NavbarTop />
@@ -42,7 +39,7 @@ const Home = () => {
               <div className="flex justify-center">
                 <div className="home-blog-cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-x-8 lg:gap-x-20 lg:gap-y-6">
                   {allBlogData &&
-                    allBlogData.Blogs.map((blogData, key) => {
+                    allBlogData.map((blogData, key) => {
                       return (
                         <div key={blogData._id}>
                           <HomeBlogCard blog={blogData} cardWidth={"max-w-[24rem]"} />

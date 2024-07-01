@@ -2,11 +2,10 @@ import React from "react";
 import Tag from "../tags/Tag";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Avatar } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const ProfileBlogCard = () => {
-  const userInfo = useSelector(state => state.auth.user);
-
+const ProfileBlogCard = ({blog}) => {
+  const navigate = useNavigate();
   return (
     <div className="blog-card-1 bg-white h-max p-3 flex flex-col gap-3 rounded-md border border-gray-300">
       <div className="card-head flex gap-2">
@@ -24,7 +23,7 @@ const ProfileBlogCard = () => {
         <div className="flex justify-between w-full">
           <div className="flex items-center gap-2">
             <div className="name-sec">
-              <p>{userInfo.fullname}</p>
+              <p>{blog.author.fullname}</p>
               <p className="text-xs text-gray-700">Apr 29</p>
             </div>
           </div>
@@ -35,8 +34,8 @@ const ProfileBlogCard = () => {
       </div>
       <div className="card-body flex flex-col gap-2 ps-11">
         <div className="card-title">
-          <h3 className="text-2xl font-semibold hover:text-indigo-800 cursor-pointer">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          <h3 className="text-2xl font-semibold hover:text-indigo-800 cursor-pointer" onClick={() => navigate(`/blogpost/${blog._id}`)}>
+            {blog.blogTitle}
           </h3>
         </div>
         <div className="tags flex gap-1">

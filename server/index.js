@@ -10,8 +10,13 @@ var blogRoutes = require("./routes/blog_route");
 var fileRoutes = require("./routes/file_route");
 var aiRoutes = require("./routes/genai_route")
 
+const corsConfig = {
+  origin: ['http://localhost:3000'],
+  method:['GET','POST','PUT','DELETE'],
+  Credentials: true
+};
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsConfig));
 app.use(
   session({
     secret: "BLOG_WEB_SESSION_SECRET",

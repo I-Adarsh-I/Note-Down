@@ -1,6 +1,7 @@
 import React from "react";
 
 const AboutCard = ({aboutText, img}) => {
+  // Card is rendered in Profile.js
   return (
     <div className="about-card ">
       {/* <img

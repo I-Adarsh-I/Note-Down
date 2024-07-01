@@ -21,28 +21,27 @@ import {
   logoutSuccessull,
 } from "../../redux/slices/UserSlice";
 
-const profileMenuItems = [
-  {
-    label: "My Profile",
-    link: "/profile",
-  },
-  {
-    label: "Edit Profile",
-    link: "/profile",
-  },
-  {
-    label: "Sign Out",
-    link: "",
-  },
-];
 
 const NavbarTop = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [openNav, setOpenNav] = useState(false);
   const userInfo = useSelector((state) => state.auth);
-
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const profileMenuItems = [
+    {
+      label: "My Profile",
+      link: `/profile/${userInfo.user._id}`,
+    },
+    {
+      label: "Edit Profile",
+      link: `/profile/${userInfo.user._id}`,
+    },
+    {
+      label: "Sign Out",
+      link: "",
+    },
+  ];
 
   const closeMenu = () => setIsMenuOpen(false);
 

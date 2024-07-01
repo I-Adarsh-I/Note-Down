@@ -2,18 +2,20 @@ const blogModel = require("../models/blog_model");
 
 module.exports.createBlog = async (req, res) => {
   try {
-    const { title, subtitle, description, tags } = req.body;
+    const { blogTitle, blogContent } = req.body;
 
     const blog = {
       author: req.user._id,
-      blogContent: {
-        blogTitle: title,
-        blogSubTitle: subtitle,
-        description: description,
-      },
-      tags: tags,
+      blogContent,
+      blogTitle
+      // tags: tags,
     };
 
+    if (!blogContent || !blogTitle) {
+      return res.status(404).json({
+        error: `${blogContent ? 'Blog title' : 'Blog content'} cannot be empty`
+      });
+    }
     const newBlog = await blogModel.create(blog);
     return res.status(201).json({ message: "Blog created", blog: newBlog });
   } catch (err) {
@@ -26,6 +28,7 @@ module.exports.showAllBlogs = async (req, res) => {
   try {
     const allBlogs = await blogModel
       .find()
+      .sort({postedAt: -1})
       .populate(
         "author",
         "_id fullname email username profileImg links about followers following"

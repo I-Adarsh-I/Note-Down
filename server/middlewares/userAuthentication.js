@@ -18,7 +18,7 @@ module.exports.userAuthentication = async (req, res, next) => {
         }
 
         const { _id } = payload;
-        const userExistInDB = await userModel.findById(_id);
+        const userExistInDB = await userModel.findById(_id).select('-password');
 
         if (!userExistInDB) {
           return res.status(404).json({ error: "User does not exist" });
