@@ -52,7 +52,7 @@ const HomeBlogCard = ({ cardWidth,blog }) => {
             </div>
           </div>
           <Typography variant="h4" color="blue-gray"  onClick={() => navigate(`/blogpost/${blog._id}`)}>
-            UI/UX Review Check
+            {blog.blogTitle}
           </Typography>
           <Typography
             color="gray"
