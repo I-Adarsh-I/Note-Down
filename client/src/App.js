@@ -7,6 +7,7 @@ import Profile from "./pages/profile/Profile";
 import Home from './pages/home/Home'
 import Write from "./pages/create_blog/Write";
 import Blog from "./pages/create_blog/Blog";
+import AddInfo from "./pages/user_info/AddInfo";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element = {<Wait />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/addinfo" element={<AddInfo/>} />
         <Route path="/home" element={<Home />} />
         <Route path="/profile/:_id" element={<Profile />} />
         <Route path="/createblog" element={<Write />} />

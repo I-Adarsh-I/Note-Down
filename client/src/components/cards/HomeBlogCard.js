@@ -51,8 +51,8 @@ const HomeBlogCard = ({ cardWidth,blog }) => {
               </Typography>
             </div>
           </div>
-          <Typography variant="h4" color="blue-gray"  onClick={() => navigate(`/blogpost/${blog._id}`)}>
-            {blog.blogTitle}
+          <Typography variant="h4" color="blue-gray" onClick={() => navigate(`/blogpost/${blog._id}`)}>
+          {blog.blogTitle ? blog.blogTitle : 'Untitled Blog'}
           </Typography>
           <Typography
             color="gray"
