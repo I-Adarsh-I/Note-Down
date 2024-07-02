@@ -23,6 +23,7 @@ const AddInfo = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <>
       {/* <NavbarTop /> */}
@@ -110,7 +111,7 @@ const AddInfo = () => {
                 <Button
                   variant="outlined"
                   size="sm"
-                  className="w-max px-2 py-1 capitalize text-xs border-gray-700"
+                  className="w-max px-2 py-1 capitalize text-xs border-gray-700 cursor-not-allowed"
                   disabled
                 >
                   + Add URL
@@ -176,7 +177,7 @@ const AddInfo = () => {
             size="sm"
             variant="text"
             autoFocus
-            onClick={() => navigate("/home")}
+            onClick={() => navigate(-1)}
             className="normal-case"
           >
             I'll add later

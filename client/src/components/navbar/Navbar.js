@@ -35,7 +35,7 @@ const NavbarTop = () => {
     },
     {
       label: "Edit Profile",
-      link: `/profile/${userInfo.user._id}`,
+      link: `/addinfo`,
     },
     {
       label: "Sign Out",
