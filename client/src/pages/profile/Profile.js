@@ -8,7 +8,6 @@ import {
   CardFooter,
   Typography,
 } from "@material-tailwind/react";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import RoomIcon from "@mui/icons-material/Room";
 import TodayIcon from "@mui/icons-material/Today";
 import CountCard from "../../components/cards/CountCard";
@@ -16,11 +15,12 @@ import Tag from "../../components/tags/Tag";
 import AboutCard from "../../components/cards/AboutCard";
 import ProfileBlogCard from "../../components/cards/ProfileBlogCard";
 import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const userInfo = useSelector((state) => state.auth.user);
   const [user, setUser] = useState([]);
   const [blogs, setBlogs] = useState([]);
@@ -85,11 +85,12 @@ const Profile = () => {
               </div>
               <div className="flex justify-center items-center gap-3">
                 <Button
-                  variant="outlined"
+                  variant="text"
                   size="sm"
-                  className="p-1 border-gray-300"
+                  className="normal-case px-5 py-2"
+                  onClick={() => navigate('/addInfo')}
                 >
-                  <MoreVertIcon />
+                  <span>Edit profile</span>
                 </Button>
                 <Button
                   variant="gradient"

@@ -14,7 +14,7 @@ const AddInfo = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -33,6 +33,38 @@ const AddInfo = () => {
             className="bg-white p-3 lg:p-4 rounded-none sm:rounded-md md:rounded-lg lg:rounded-lg w-full lg:w-5/6"
             method="post"
           >
+            <div className="flex border-b-2 border-blue-600 w-14 pb-0 mb-3 block md:hidden" onClick={() => navigate(-1)}>
+              <svg
+                height={"18px"}
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  {" "}
+                  <path
+                    d="M6 12H18M6 12L11 7M6 12L11 17"
+                    stroke="#1E88E5"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>{" "}
+                </g>
+              </svg>
+              <Button
+                variant="text"
+                size="sm"
+                className="text-blue-600 p-0 normal-case rounded-none"
+              >
+                Back
+              </Button>
+            </div>
             <div className="header pb-2 border-b-2">
               <h3 className="text-2xl lg:text-3xl">About you</h3>
               <p className="text-xs lg:text-sm text-blue-gray-400 font-semibold">
@@ -62,6 +94,37 @@ const AddInfo = () => {
                   </button>
                 </div>
               </div>
+              <div className="grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-6">
+                <div className="sm:col-span-3">
+                  <label htmlFor="first-name" className="text-sm font-semibold">
+                    First name
+                  </label>
+                  <div className="">
+                    <input
+                      type="text"
+                      name="first-name"
+                      id="first-name"
+                      autoComplete="given-name"
+                      className="block w-full border border-slate-500 p-1 rounded-md text-sm focus:ring-1"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-3">
+                  <label htmlFor="last-name" className="text-sm font-semibold">
+                    Last name
+                  </label>
+                  <div className="">
+                    <input
+                      type="text"
+                      name="last-name"
+                      id="last-name"
+                      autoComplete="family-name"
+                      className="block w-full border border-slate-500 p-1 rounded-md text-sm focus:ring-1"
+                    />
+                  </div>
+                </div>
+              </div>
               <div className="flex flex-col gap-1">
                 <label htmlFor="" className="text-sm font-semibold">
                   Username <span className="text-red-500">*</span>
@@ -85,10 +148,24 @@ const AddInfo = () => {
                   type="text"
                   placeholder=""
                   className="border border-slate-500 p-1 rounded-md h-36 text-sm focus:ring-1"
+                  required
                 />
                 <p className="text-xs lg:text-sm text-gray-500 text-wrap">
                   Write a unique bio that can make a strong impression on
                   people.
+                </p>
+              </div>
+              <div className="flex flex-col gap-1">
+                <label htmlFor="" className="text-sm font-semibold">
+                  About
+                </label>
+                <textarea
+                  type="text"
+                  placeholder=""
+                  className="border border-slate-500 p-1 rounded-md h-36 text-sm focus:ring-1"
+                />
+                <p className="text-xs lg:text-sm text-gray-500 text-wrap">
+                  Write what describes you and your work the best.
                 </p>
               </div>
               <div className="flex flex-col gap-1">
@@ -118,23 +195,25 @@ const AddInfo = () => {
                 </Button>
               </div>
             </div>
-            <div className="buttons flex gap-2">
-              <Button
-                size="sm"
-                variant="gradient"
-                color="blue"
-                className="normal-case text-sm"
-              >
-                Save
-              </Button>
-              <Button
-                size="sm"
-                variant="text"
-                className="normal-case text-sm text-gray-700"
-                onClick={handleClickOpen}
-              >
-                Add later
-              </Button>
+            <div className="buttons flex gap-2 justify-end items-center">
+              <div className="flex gap-2">
+                <Button
+                  size="sm"
+                  variant="gradient"
+                  color="blue"
+                  className="normal-case text-sm"
+                >
+                  Save
+                </Button>
+                <Button
+                  size="sm"
+                  variant="text"
+                  className="normal-case text-sm text-gray-700"
+                  onClick={handleClickOpen}
+                >
+                  Add later
+                </Button>
+              </div>
             </div>
           </form>
         </div>
@@ -147,7 +226,10 @@ const AddInfo = () => {
         aria-labelledby="responsive-dialog-title"
         className="rounded-lg"
       >
-        <DialogTitle id="responsive-dialog-title" className="flex items-center gap-2">
+        <DialogTitle
+          id="responsive-dialog-title"
+          className="flex items-center gap-2"
+        >
           <div className="w-max p-2 rounded-full bg-yellow-400">
             <svg
               className="h-5 w-5 text-orange-800"
@@ -187,7 +269,6 @@ const AddInfo = () => {
             onClick={handleClose}
             autoFocus
             className="normal-case"
-            
           >
             Add now
           </Button>

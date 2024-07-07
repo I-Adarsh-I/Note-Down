@@ -35,18 +35,22 @@ const userSchema = mongoose.Schema({
       type: String,
     },
   ],
-  folowers: [
+  followers: [
     {
       type: ObjectId,
       ref: 'User'
     },
   ],
-  folowing: [
+  following: [
     {
       type: ObjectId,
       ref: 'User'
     },
   ],
+  joinedOn:{
+    type:Date,
+    default:Date.now,
+  }
 });
 
 const userModel = mongoose.model('User', userSchema);

@@ -112,10 +112,7 @@ module.exports.editBlog = async (req, res) => {
   const {
     blogId,
     blogTitle,
-    blogSubTitle,
-    description,
-    blogImg,
-    additionalLinks,
+    blogContent,
   } = req.body;
 
   try {
@@ -123,11 +120,8 @@ module.exports.editBlog = async (req, res) => {
       blogId,
       {
         $set: {
-          "blogContent.blogTitle": blogTitle,
-          "blogContent.blogSubTitle": blogSubTitle,
-          "blogContent.description": description,
-          "blogContent.blogImg": blogImg,
-          "blogContent.additionalLinks": additionalLinks,
+          "blogTitle": blogTitle,
+          "blogContent": blogContent,
           isEdited: true,
         },
       },
