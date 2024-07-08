@@ -1,9 +1,10 @@
 import React from "react";
 import { Avatar, Button } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
+import moment from "moment";
 
 
-const Author = ({fullname, profileImg, description, joinedOn, work, location}) => {
+const Author = ({aboutAuthor}) => {
   const userInfo = useSelector(state => state.auth)
   return (
     <div className="about-dev hidden lg:flex flex-col gap-2 justify-center rounded-xl bg-white border border-gray-300 p-2 py-4">
@@ -16,9 +17,9 @@ const Author = ({fullname, profileImg, description, joinedOn, work, location}) =
             height: 48,
           }}
         />
-        <h3 className="text-lg font-medium">{fullname}</h3>
+        <h3 className="text-lg font-medium">{aboutAuthor.fullname}</h3>
       </div>
-      {userInfo.user.fullname === fullname ? (
+      {userInfo.user.fullname === aboutAuthor.fullname ? (
         <Button className="capitalize tracking-wide">
           Profile
         </Button>
@@ -27,13 +28,11 @@ const Author = ({fullname, profileImg, description, joinedOn, work, location}) =
           Follow
         </Button>
       )}
-      {/* <Button className="capitalize">{userInfo.user.fullname === fullname? 'Profile': "Follow"}</Button> */}
       <p className="text-base text-gray-700">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem
-        commodi,
+        {aboutAuthor.about}
       </p>
       <p className="text-base text-gray-700">
-        <b>Joined: </b> DD/MM/YYYY
+        <b>Joined: </b> {moment(aboutAuthor.joinedOn).format('ll')}
       </p>
       <p className="text-base text-gray-700">
         <b>Work: </b> MERN Stack developer

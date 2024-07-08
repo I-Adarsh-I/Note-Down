@@ -26,13 +26,13 @@ const Home = () => {
   useEffect(() => {
     getAllBlogs();
   }, []);
-  
+
   return (
     <>
       <NavbarTop />
       <div className="home-page-hero w-full flex flex-col items-center">
         <HomeHeroSec />
-        <div className="home-main-bot flex justify-center px-4 lg:px-0">
+        <div className="home-main-bot flex justify-center px-2 md:px-0">
           <div className="container flex lg:flex-row flex-col-reverse justify-between gap-0 lg:gap-8">
             <div className="blog-sec w-full lg:w-2/3">
               <p className="text-gray-800 text-lg font-medium">All Blogs</p>
@@ -42,7 +42,10 @@ const Home = () => {
                     allBlogData.map((blogData, key) => {
                       return (
                         <div key={blogData._id}>
-                          <HomeBlogCard blog={blogData} cardWidth={"max-w-[24rem]"} />
+                          <HomeBlogCard
+                            blog={blogData}
+                            cardWidth={"max-w-[24rem]"}
+                          />
                         </div>
                       );
                     })}
@@ -61,7 +64,7 @@ const Home = () => {
                     }}
                   />
                   <div className="flex flex-col items-center justify-center">
-                    <h3 className="text-lg font-medium">Full Name</h3>
+                    <h3 className="text-lg font-medium">Adarsh Singh</h3>
                     <p className="text-center text-sm text-gray-500 font-medium">
                       MERN Stack developer
                     </p>
@@ -78,18 +81,18 @@ const Home = () => {
                   Categories
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <Tag tagContent={"MongoDB"} fontSize={"text-sm"} />
-                  <Tag tagContent={"React.js"} fontSize={"text-sm"} />
-                  <Tag tagContent={"Next.js"} fontSize={"text-sm"} />
-                  <Tag tagContent={"SQL"} fontSize={"text-sm"} />
-                  <Tag tagContent={"MongoDB"} fontSize={"text-sm"} />
-                  <Tag tagContent={"React.js"} fontSize={"text-sm"} />
-                  <Tag tagContent={"Next.js"} fontSize={"text-sm"} />
-                  <Tag tagContent={"SQL"} fontSize={"text-sm"} />
-                  <Tag tagContent={"MongoDB"} fontSize={"text-sm"} />
-                  <Tag tagContent={"React.js"} fontSize={"text-sm"} />
-                  <Tag tagContent={"Next.js"} fontSize={"text-sm"} />
-                  <Tag tagContent={"SQL"} fontSize={"text-sm"} />
+                  <Tag tagContent={"MongoDB"} fontSize={"text-xs md:text-sm"} />
+                  <Tag tagContent={"React.js"} fontSize={"text-xs md:text-sm"} />
+                  <Tag tagContent={"Next.js"} fontSize={"text-xs md:text-sm"} />
+                  <Tag tagContent={"SQL"} fontSize={"text-xs md:text-sm"} />
+                  <Tag tagContent={"MongoDB"} fontSize={"text-xs md:text-sm"} />
+                  <Tag tagContent={"React.js"} fontSize={"text-xs md:text-sm"} />
+                  <Tag tagContent={"Next.js"} fontSize={"text-xs md:text-sm"} />
+                  <Tag tagContent={"SQL"} fontSize={"text-xs md:text-sm"} />
+                  <Tag tagContent={"MongoDB"} fontSize={"text-xs md:text-sm"} />
+                  <Tag tagContent={"React.js"} fontSize={"text-xs md:text-sm"} />
+                  <Tag tagContent={"Next.js"} fontSize={"text-xs md:text-sm"} />
+                  <Tag tagContent={"SQL"} fontSize={"text-xs md:text-sm"} />
                 </div>
               </div>
             </div>

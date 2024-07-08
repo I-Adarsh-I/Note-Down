@@ -25,6 +25,9 @@ const userSchema = mongoose.Schema({
   about: {
     type: String,
   },
+  bio:{
+    type:String,
+  },
   interests: [
     {
       type: String

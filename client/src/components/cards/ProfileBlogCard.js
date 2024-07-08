@@ -48,13 +48,13 @@ const ProfileBlogCard = ({blog}) => {
         <div className="applauds">
           <p className="text-sm text-center">
             <i className="fa-solid fa-hands-clapping fa-lg pe-1 text-gray-600 cursor-pointer"></i>
-            11 Applauds
+            {blog.comments.length}
           </p>
         </div>
         <div className="comments">
           <p className="text-sm">
             <i className="fa-regular fa-comment fa-lg pe-1 text-gray-600 cursor-pointer"></i>
-            12 Comments
+            {blog.comments.length}
           </p>
         </div>
       </div>

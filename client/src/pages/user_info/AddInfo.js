@@ -9,12 +9,23 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddInfo = () => {
   const navigate = useNavigate();
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const [open, setOpen] = useState(false);
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [bio, setBio] = useState("");
+  const [about, setAbout] = useState("");
+  const [portfolioUrl, setPortfolioUrl] = useState("");
+  const [blogUrl, setBlogUrl] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -22,6 +33,38 @@ const AddInfo = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const token = localStorage.getItem("Auth token");
+  const updateProfile = async (e) => {
+    e.preventDefault();
+    const request = {
+      username: username,
+      about: about,
+      bio: bio,
+      links: [portfolioUrl, blogUrl],
+    };
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const resp = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/updateprofile`,
+        request,
+        config
+      );
+      if (resp.status === 200) {
+        toast.success(resp.data.message);
+      }
+    } catch (err) {
+      toast.error(err.response.data.error);
+      console.error(err);
+    }
   };
 
   return (
@@ -32,8 +75,12 @@ const AddInfo = () => {
           <form
             className="bg-white p-3 lg:p-4 rounded-none sm:rounded-md md:rounded-lg lg:rounded-lg w-full lg:w-5/6"
             method="post"
+            onSubmit={updateProfile}
           >
-            <div className="flex border-b-2 border-blue-600 w-14 pb-0 mb-3 block md:hidden" onClick={() => navigate(-1)}>
+            <div
+              className="flex border-b-2 border-blue-600 w-14 pb-0 mb-3 block md:hidden"
+              onClick={() => navigate(-1)}
+            >
               <svg
                 height={"18px"}
                 viewBox="0 0 24 24"
@@ -106,6 +153,8 @@ const AddInfo = () => {
                       id="first-name"
                       autoComplete="given-name"
                       className="block w-full border border-slate-500 p-1 rounded-md text-sm focus:ring-1"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
                     />
                   </div>
                 </div>
@@ -121,6 +170,8 @@ const AddInfo = () => {
                       id="last-name"
                       autoComplete="family-name"
                       className="block w-full border border-slate-500 p-1 rounded-md text-sm focus:ring-1"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
                     />
                   </div>
                 </div>
@@ -134,6 +185,8 @@ const AddInfo = () => {
                   placeholder="@your_username"
                   className="border border-slate-500 p-1 rounded-md text-sm focus:ring-1"
                   required
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
                 <p className="text-xs lg:text-sm text-gray-500">
                   Your username will make you a new personality. People will be
@@ -149,6 +202,8 @@ const AddInfo = () => {
                   placeholder=""
                   className="border border-slate-500 p-1 rounded-md h-36 text-sm focus:ring-1"
                   required
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
                 />
                 <p className="text-xs lg:text-sm text-gray-500 text-wrap">
                   Write a unique bio that can make a strong impression on
@@ -163,6 +218,8 @@ const AddInfo = () => {
                   type="text"
                   placeholder=""
                   className="border border-slate-500 p-1 rounded-md h-36 text-sm focus:ring-1"
+                  value={about}
+                  onChange={(e) => setAbout(e.target.value)}
                 />
                 <p className="text-xs lg:text-sm text-gray-500 text-wrap">
                   Write what describes you and your work the best.
@@ -179,11 +236,15 @@ const AddInfo = () => {
                   type="url"
                   placeholder="Portfolio: https://example.com"
                   className="text-xs lg:text-sm border border-slate-500 p-1 rounded-md text-sm focus:ring-1"
+                  value={portfolioUrl}
+                  onChange={(e) => setPortfolioUrl(e.target.value)}
                 />
                 <input
                   type="url"
                   placeholder="Blog: https://example.com"
                   className="text-xs lg:text-sm border border-slate-500 p-1 rounded-md text-sm focus:ring-1 my-1"
+                  value={blogUrl}
+                  onChange={(e) => setBlogUrl(e.target.value)}
                 />
                 <Button
                   variant="outlined"
@@ -202,6 +263,7 @@ const AddInfo = () => {
                   variant="gradient"
                   color="blue"
                   className="normal-case text-sm"
+                  type="submit"
                 >
                   Save
                 </Button>
@@ -250,8 +312,7 @@ const AddInfo = () => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
+            Navigating to different page will clear all entered data.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -274,6 +335,7 @@ const AddInfo = () => {
           </Button>
         </DialogActions>
       </Dialog>
+      <ToastContainer />
     </>
   );
 };

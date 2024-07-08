@@ -3,10 +3,11 @@ const userModel = require("../models/user_model");
 module.exports.updateUserInfo = async (req, res) => {
   try {
     const userId = req.user._id;
-    const { username, about, links, profileImg, interests } = req.body;
+    const { username, about, links, profileImg, interests, bio } = req.body;
     const userDetails = {
       username,
       about,
+      bio,
       links,
       profileImg,
       interests,
@@ -18,7 +19,7 @@ module.exports.updateUserInfo = async (req, res) => {
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "Internal server error" });
-  }
+  } 
 };
 
 module.exports.getUserInfo = async(req, res) => {

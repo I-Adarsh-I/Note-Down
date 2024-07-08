@@ -178,52 +178,73 @@ module.exports.likes = async (req, res) => {
     const like = await blogModel
       .findByIdAndUpdate(
         req.body.blogId,
-        {
-          $push: { likes: req.user._id },
-        },
-        {
-          new: true,
-        }
+        { $push: { likes: req.user._id } },
+        { new: true }
       )
       .populate("author", "_id fullname");
 
     if (!like) {
-      res.status(400).json({ error: "Post could not be found" });
-    } else {
-      res.status(200).json({
-        message: `Post liked by ${req.user.fullname}`,
-        user: req.user.fullname,
-      });
+      return res.status(400).json({ error: "Post could not be found" });
     }
-    console.log("logging user in likes: ", req.user);
+
+    res.status(200).json({
+      message: `Post liked by ${req.user.fullname}`,
+      user: req.user.fullname,
+      likes: like.likes.length, // Return the length of likes array
+    });
   } catch (err) {
-    console.log(err);
-    res.status(500).josn({ error: "Internal server error" });
+    console.error("Error liking the post:", err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
+// Handling unlike action
 module.exports.unlike = async (req, res) => {
   try {
     const unlike = await blogModel
       .findByIdAndUpdate(
         req.body.blogId,
-        {
-          $pull: { likes: req.user._id },
-        },
-        {
-          new: true,
-        }
+        { $pull: { likes: req.user._id } },
+        { new: true }
       )
       .populate("author", "_id fullname");
 
     if (!unlike) {
-      res.status(400).json({ error: "Post could not be found" });
-    } else {
-      res.status(200).json({ message: `Post unliked by ${req.user.fullname}` });
+      return res.status(400).json({ error: "Post could not be found" });
     }
-    console.log("logging user in likes: ", req.user);
+
+    res.status(200).json({
+      message: `Post unliked by ${req.user.fullname}`,
+      likes: unlike.likes.length, 
+    });
   } catch (err) {
-    console.log(err);
-    res.status(500).josn({ error: "Internal server error" });
+    console.error("Error unliking the post:", err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
+
+
+module.exports.likeAndUnlike = async (req, res) => {
+  try {
+    if (!req.user) {
+      return res.status(400).json({ error: "User not authorized" });
+    }
+
+    const { blogId } = req.params;
+    const blog = await blogModel.findById(blogId);
+
+    if (!blog) {
+      return res.status(404).json({ error: "Post does not exist" });
+    }
+
+    const currentUserLikedPost = blog.likes.some(
+      (userId) => userId.toString() === req.user._id.toString()
+    );
+
+    res.json({ isLiked: currentUserLikedPost });
+  } catch (err) {
+    console.error("Error checking like state:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
