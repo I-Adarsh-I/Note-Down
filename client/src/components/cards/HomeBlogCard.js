@@ -11,14 +11,15 @@ import Tag from "../tags/Tag";
 import { useNavigate } from "react-router-dom";
 import moment from "moment/moment";
 
-const HomeBlogCard = ({ cardWidth,blog }) => {
+const HomeBlogCard = ({ cardWidth, blog }) => {
   const navigate = useNavigate();
+  // console.log(userInfo);
 
   return (
-    // max-w-[24rem]
-    // onClick={() => navigate(`/blogpost/${blog._id}`)}
     <div>
-      <Card className={`w-full lg:${cardWidth} overflow-hidden my-4 rounded-lg cursor-pointer hover:drop-shadow`}>
+      <Card
+        className={`w-full lg:${cardWidth} overflow-hidden my-4 rounded-lg cursor-pointer hover:drop-shadow`}
+      >
         <CardHeader
           floated={false}
           shadow={false}
@@ -32,9 +33,12 @@ const HomeBlogCard = ({ cardWidth,blog }) => {
           />
         </CardHeader>
         <CardBody className="pt-0 pb-4 px-4">
-          <div className="flex gap-2 pb-2" onClick={() => {
-            navigate(`/profile/${blog.author._id}`)
-          }}>
+          <div
+            className="flex gap-2 pb-2"
+            onClick={() => {
+              navigate(`/profile/${blog.author._id}`);
+            }}
+          >
             <Avatar
               size="sm"
               variant="circular"
@@ -51,8 +55,12 @@ const HomeBlogCard = ({ cardWidth,blog }) => {
               </Typography>
             </div>
           </div>
-          <Typography variant="h4" color="blue-gray" onClick={() => navigate(`/blogpost/${blog._id}`)}>
-          {blog.blogTitle ? blog.blogTitle : 'Untitled Blog'}
+          <Typography
+            variant="h4"
+            color="blue-gray"
+            onClick={() => navigate(`/blogpost/${blog._id}`)}
+          >
+            {blog.blogTitle ? blog.blogTitle : "Untitled Blog"}
           </Typography>
           <Typography
             color="gray"
@@ -81,8 +89,8 @@ const HomeBlogCard = ({ cardWidth,blog }) => {
               </p>
             </div>
           </div>
-          <Typography className="font-normal">
-            <span className="px-1">&#9679;</span>4 min
+          <Typography className="text-sm md:text-base font-normal">
+            <span className="px-1 text-sm md:text-base">&#9679;</span>4 min
           </Typography>
         </CardFooter>
       </Card>

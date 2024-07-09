@@ -74,7 +74,7 @@ const Write = () => {
         request,
         config
       );
-      console.log(resp);
+      // console.log(resp);
       if (resp.status === 201) {
         toast.success(resp.data.message);
         return navigate("/home");
@@ -94,7 +94,7 @@ const Write = () => {
           onSubmit={handeBlogSubmit}
           className="container flex flex-col gap-5 bg-white rounded-lg mb-2"
         >
-          <div className="image-area px-4 py-4">
+          <div className="image-area px-2 md:px-4 py-4">
             <input
               type="file"
               name="Cover image"
@@ -104,7 +104,7 @@ const Write = () => {
             <Button
               variant="outlined"
               size="sm"
-              className="cursor-pointer mb-3"
+              className="cursor-pointer mb-3 normal-case text-xs md:text-sm rounded-full md:rounded-md px-3 py-2 md:px-inherit md:py-inherit"
             >
               Add a cover image
             </Button>
@@ -118,7 +118,7 @@ const Write = () => {
             <input
               type="text"
               placeholder="Your blog's heading"
-              className="px-4 py-2 text-4xl font-semibold placeholder:text-4xl placeholder:font-bold w-full mb-3 selection:bg-blue-200"
+              className="p-2 md:px-4 md:py-2 font-semibold text-3xl md:text-4xl placeholder:text-3xl md:placeholder:text-4xl placeholder:font-bold w-full mb-3 selection:bg-blue-200"
               value={blogTitle}
               onChange={(e) => setBlogTitle(e.target.value)}
             />
@@ -143,8 +143,8 @@ const Write = () => {
               </div> */}
           </div>
           <div className="submit-btn px-4 pb-4">
-            <Button variant="gradient" size="sm" type="submit">
-              Create Blog
+            <Button variant="gradient" size="sm" type="submit" className="text-xs md:text-sm normal-case">
+              Create blog
             </Button>
           </div>
         </form>

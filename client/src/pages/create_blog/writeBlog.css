@@ -31,3 +31,29 @@
     color: #a2a2a2;
     font-style: normal;
   }
+
+  @media (max-width: 600px) {
+    .ql-snow.ql-toolbar button,
+    .ql-snow .ql-toolbar button {
+      height: 20px;
+      width: 32px;
+      padding: 2px 4px;
+    }
+    .ql-toolbar.ql-snow + .ql-container.ql-snow {
+      font-size: 18px;
+      height: 250px;
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .ql-snow.ql-toolbar button,
+    .ql-snow .ql-toolbar button {
+      height: 16px;
+      width: 28px;
+      padding: 1px 3px;
+    }
+    .ql-toolbar.ql-snow + .ql-container.ql-snow {
+      font-size: 16px;
+      height: 200px;
+    }
+  }

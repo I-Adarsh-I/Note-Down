@@ -64,9 +64,9 @@ const Profile = () => {
       <NavbarTop />
       <div className="profile-main">
         <div className="profile-main-top h-max flex flex-col items-center">
-          <div className="avatar-bg w-full bg-gradient-to-r from-orange-100 to-purple-300 h-48"></div>
+          <div className="avatar-bg w-full bg-gradient-to-r from-orange-100 to-purple-300 h-28 md:h-48"></div>
           <div className="container flex flex-col px-2 md:px-0">
-            <div className="avatar flex justify-between w-full h-16">
+            <div className="avatar flex justify-between w-full h-12 md:h-16">
               <div>
                 <Avatar
                   alt={
@@ -84,10 +84,20 @@ const Profile = () => {
                     height: 108,
                     position: "relative",
                     top: -56,
+                    "@media (max-width: 600px)": {
+                      width: 80,
+                      height: 80,
+                      top: -40,
+                    },
+                    "@media (max-width: 400px)": {
+                      width: 80,
+                      height: 80,
+                      top: -40,
+                    },
                   }}
                 />
               </div>
-              <div className="flex justify-center items-center gap-3">
+              <div className="flex justify-center items-center">
                 {user._id === userInfo._id ? (
                   <>
                     <Button
@@ -120,10 +130,21 @@ const Profile = () => {
                     : user.fullname}
                 </h4>
                 <p className="text-xs md:text-sm text-gray-700 font-normal md:hidden">
-                  <span>@</span>
-                  {user._id === userInfo._id
-                    ? userInfo.username
-                    : user.username}
+                  {user._id === userInfo._id ? (
+                    userInfo.username ? (
+                      <>
+                        <span>@{userInfo.username}</span>
+                      </>
+                    ) : (
+                      <></>
+                    )
+                  ) : user.username ? (
+                    <>
+                      <span>@{user.username}</span>
+                    </>
+                  ) : (
+                    <></>
+                  )}
                 </p>
                 <p className="text-sm md:text-base text-wrap text-gray-800 w-full mt-3 md:mb-2 md:mt-0">
                   {user.bio
@@ -134,21 +155,54 @@ const Profile = () => {
                 </p>
                 <div className="flex gap-3 flex-wrap py-2 md:py-0">
                   <p className="text-xs md:text-sm text-gray-700 font-normal hidden md:block">
-                    <span>@</span>
-                    {user._id === userInfo._id
-                      ? userInfo.username
-                      : user.username}
+                    {user._id === userInfo._id ? (
+                      userInfo.username ? (
+                        <>
+                          <span>@{userInfo.username}</span>
+                        </>
+                      ) : (
+                        <></>
+                      )
+                    ) : user.username ? (
+                      <>
+                        <span>@{user.username}</span>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </p>
                   <div className="flex md:gap-1 items-center">
-                    <RoomIcon
-                      sx={{
-                        color: "gray",
-                        fontSize: isMobile ? "16px" : "18px",
-                      }}
-                    />
-                    <p className="text-xs md:text-sm text-gray-700 font-normal">
-                      Location
-                    </p>
+                    {user._id === userInfo._id ? (
+                      userInfo.location ? (
+                        <>
+                          <RoomIcon
+                            sx={{
+                              color: "gray",
+                              fontSize: isMobile ? "16px" : "18px",
+                            }}
+                          />
+                          <p className="text-xs md:text-sm text-gray-700 font-normal">
+                            {userInfo.location}
+                          </p>
+                        </>
+                      ) : (
+                        <></>
+                      )
+                    ) : userInfo.location ? (
+                      <>
+                        <RoomIcon
+                          sx={{
+                            color: "gray",
+                            fontSize: isMobile ? "16px" : "18px",
+                          }}
+                        />
+                        <p className="text-xs md:text-sm text-gray-700 font-normal">
+                          {user.location}
+                        </p>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                   <div className="flex gap-1 items-center">
                     <TodayIcon
@@ -160,8 +214,8 @@ const Profile = () => {
                     <p className="text-xs md:text-sm text-gray-700 font-normal">
                       {user.joinedOn
                         ? user._id === userInfo._id
-                          ? moment(userInfo.joinedOn).format("MMM Do YY")
-                          : moment(user.joinedOn).format("MMM Do YY")
+                          ? `Joined on ${moment(userInfo.joinedOn).format("ll")}`
+                          : `Joined on ${moment(user.joinedOn).format("ll")}`
                         : ""}
                     </p>
                   </div>
@@ -186,7 +240,7 @@ const Profile = () => {
               </p>
               {blogs.length === 0 ? (
                 <>
-                  <Card className="my-3 w-96 rounded-lg">
+                  <Card className="my-3 w-full sm:w-96 rounded-lg">
                     <CardBody className="pb-2">
                       <img src="/rocket.gif" alt="Get started now" />
                       <Typography
@@ -250,10 +304,13 @@ const Profile = () => {
                     : ""}
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <Tag tagContent={"MongoDB"} fontSize={"text-xs md:text-base"} />
-                  <Tag tagContent={"React.js"} fontSize={"text-xs md:text-base"} />
-                  <Tag tagContent={"Next.js"} fontSize={"text-xs md:text-base"} />
-                  <Tag tagContent={"SQL"} fontSize={"text-xs md:text-base"} />
+                  <Tag tagContent={"MongoDB"} fontSize={"text-xs lg:text-sm"} />
+                  <Tag
+                    tagContent={"React.js"}
+                    fontSize={"text-xs lg:text-sm"}
+                  />
+                  <Tag tagContent={"Next.js"} fontSize={"text-xs lg:text-sm"} />
+                  <Tag tagContent={"SQL"} fontSize={"text-xs lg:text-sm"} />
                 </div>
               </div>
             </div>

@@ -7,6 +7,18 @@ const userModel = require("../models/user_model");
 module.exports.registerUser = async (req, res) => {
   try {
     const { fullname, email, password } = req.body;
+    //Username generation
+    const usernameVar = fullname.toLowerCase().replace(/ /g,"_");
+    const defaultUsername = usernameVar;
+    let counter = 1;
+
+    while(await userModel.findOne({username: defaultUsername})){
+      defaultUsername = `${defaultUsername}_${counter}`
+      counter++; 
+    }
+
+    // Joining date generation
+    const date = new Date();
 
     if (!fullname || !email || !password)
       return res.status(400).json({ error: "One or more empty fields" });
@@ -23,6 +35,8 @@ module.exports.registerUser = async (req, res) => {
       fullname,
       email,
       password: hashedPass,
+      username: defaultUsername,
+      joinedOn: date
     });
     console.log("New user: ", registeredUser);
     return res.status(201).json({ newUser: registeredUser });
@@ -57,9 +71,13 @@ module.exports.loginUser = async (req, res) => {
         expiresIn: "1d",
       }
     );
+    
+    const userResp = isExistingUser.toObject();
+    delete userResp.password;
+    
     return res.status(200).json({
       message: "User logged in successfully",
-      user: { isExistingUser },
+      user: userResp,
       token: { token },
     });
   } catch (err) {

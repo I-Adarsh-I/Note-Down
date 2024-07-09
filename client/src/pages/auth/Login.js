@@ -47,11 +47,11 @@ function Login() {
         `${process.env.REACT_APP_BASE_URL}/login`,
         request
       );
-      console.log(resp);
+      // console.log(resp);
       if (resp.status === 200) {
         toast.success(resp.data.message);
         localStorage.setItem("Auth token", resp.data.token.token);
-        dispatch(loginSuccessfull(resp.data.user.isExistingUser));
+        dispatch(loginSuccessfull(resp.data.user));
         return navigate("/home");
       }
     } catch (err) {

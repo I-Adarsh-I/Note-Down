@@ -20,7 +20,7 @@ const userSchema = mongoose.Schema({
   },
   profileImg: {
     type: String,
-    default: "",
+    default: "https://cdn-icons-png.flaticon.com/512/6596/6596121.png",
   },
   about: {
     type: String,
@@ -52,7 +52,6 @@ const userSchema = mongoose.Schema({
   ],
   joinedOn:{
     type:Date,
-    default:Date.now,
   }
 });
 

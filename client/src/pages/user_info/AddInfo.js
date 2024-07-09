@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import NavbarTop from "../../components/navbar/Navbar";
-import { Avatar, Button } from "@material-tailwind/react";
+import { Button } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -8,20 +8,23 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material";
+import { Avatar, useTheme } from "@mui/material";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
 
 const AddInfo = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const userInfo = useSelector(state => state.auth);
+
   const [open, setOpen] = useState(false);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(userInfo.user.username);
   const [bio, setBio] = useState("");
   const [about, setAbout] = useState("");
   const [portfolioUrl, setPortfolioUrl] = useState("");
@@ -87,20 +90,20 @@ const AddInfo = () => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                 <g
                   id="SVGRepo_tracerCarrier"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 ></g>
                 <g id="SVGRepo_iconCarrier">
                   {" "}
                   <path
                     d="M6 12H18M6 12L11 7M6 12L11 17"
                     stroke="#1E88E5"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   ></path>{" "}
                 </g>
               </svg>
@@ -122,14 +125,14 @@ const AddInfo = () => {
             <div className="body flex flex-col gap-3 py-4">
               <div className="col-span-full">
                 <label
-                  for="photo"
+                  htmlFor="photo"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Photo
                 </label>
                 <div className="mt-1 flex items-center gap-x-3">
                   <Avatar
-                    src="https://docs.material-tailwind.com/img/face-2.jpg"
+                    src={userInfo.user.profileImg}
                     size="sm"
                     alt="Name_of_user"
                   />

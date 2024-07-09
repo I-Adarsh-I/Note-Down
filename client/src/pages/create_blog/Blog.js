@@ -48,7 +48,7 @@ const Blog = () => {
         { blogId: blog._id },
         config
       );
-      console.log(response);
+      // console.log(response);
       if (response.status === 200) {
         setLikes(response.data.likes);
       } else {
@@ -80,7 +80,7 @@ const Blog = () => {
   };
 
   if (!blog) {
-    return <p>Loading...</p>;
+    return <p></p>;
   }
 
   return (
